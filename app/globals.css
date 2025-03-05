@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+@plugin "@tailwindcss/typography";
+
+/* This syncs Mantine's dark mode with Tailwind's  */
+@custom-variant dark (&:where([data-mantine-color-scheme=dark], [data-mantine-color-scheme=dark] *));
+
+[data-mantine-color-scheme="dark"] .prose pre {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prose pre {
+    border-radius: 0.25rem;
+    overflow-x: auto;
+}
+
+.link,
+.prose :where(a) {
+    @apply text-blue-600;
+    @apply no-underline;
+}
+
+.prose code:not(pre code) {
+    @apply not-dark:bg-gray-200;
+    @apply dark:bg-gray-800;
+    @apply text-red-500;
+    @apply p-1;
+    border-radius: 0.25rem;
+}
+
+.prose code::before,
+.prose code::after {
+    content: "";
+}
+
+.prose blockquote {
+    @apply py-1;
+    background-color: #242424;
+}
+
+.prose blockquote {
+    font-style: normal;
+}
+
+.prose blockquote p::before,
+.prose blockquote p::after {
+    content: "";
+}
