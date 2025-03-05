@@ -13,6 +13,7 @@ import type { Metadata } from "next"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import "./globals.css"
+import { SharedDataProvider } from "@/contexts/shared-data";
 
 export const metadata: Metadata = {
     title: "EssentialsX",
@@ -28,17 +29,19 @@ export default function RootLayout({children}: Readonly<{
             <ColorSchemeScript/>
         </head>
         <body>
-        <MantineProvider theme={theme}>
-            <AppShell header={{height: 80}}>
-                <AppShellHeader>
-                    <Header/>
-                </AppShellHeader>
-                <AppShellMain>
-                    {children}
-                    <Footer/>
-                </AppShellMain>
-            </AppShell>
-        </MantineProvider>
+        <SharedDataProvider>
+            <MantineProvider theme={theme}>
+                <AppShell header={{height: 80}}>
+                    <AppShellHeader>
+                        <Header/>
+                    </AppShellHeader>
+                    <AppShellMain>
+                        {children}
+                        <Footer/>
+                    </AppShellMain>
+                </AppShell>
+            </MantineProvider>
+        </SharedDataProvider>
         </body>
         </html>
     )
