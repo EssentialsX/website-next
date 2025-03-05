@@ -1,6 +1,12 @@
+"use client";
+
 import { Button } from "@mantine/core";
+import { useSharedData } from "@/contexts/shared-data";
+import CountUp from "react-countup";
 
 export default function Community() {
+    const { discord, patreon, github } = useSharedData();
+
     return (
         <div className="flex flex-col">
             <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
@@ -55,15 +61,17 @@ export default function Community() {
                             <h3 className="font-bold mb-2">EssentialsX is part of MOSS on Discord</h3>
                             <div className="flex justify-between mb-2">
                                 <div>
-                                    <p className="text-3xl font-bold">5564</p>
+                                    <p className="text-3xl font-bold w-24">
+                                        <CountUp start={0} end={discord.members} />
+                                    </p>
                                     <p className="text-sm">ONLINE</p>
                                 </div>
                                 <div>
-                                    <p className="text-3xl font-bold">4000+</p>
+                                    <p className="text-3xl font-bold">18,000+</p>
                                     <p className="text-sm">MEMBERS</p>
                                 </div>
                             </div>
-                            <Button>
+                            <Button component="a" href="https://discord.gg/h8CnPSw">
                                 Join on Discord...
                             </Button>
                         </div>
@@ -72,15 +80,19 @@ export default function Community() {
                             <h3 className="font-bold mb-2">Support EssentialsX on Patreon</h3>
                             <div className="flex justify-between mb-2">
                                 <div>
-                                    <p className="text-3xl font-bold">310</p>
+                                    <p className="text-3xl font-bold w-24">
+                                        <CountUp start={0} end={patreon.patrons} />
+                                    </p>
                                     <p className="text-sm">PATRONS</p>
                                 </div>
                                 <div>
-                                    <p className="text-3xl font-bold">$44</p>
+                                    <p className="text-3xl font-bold w-34">
+                                        <CountUp start={0} end={Math.round(patreon.sum / 100)} prefix="$" />
+                                    </p>
                                     <p className="text-sm">PER MONTH</p>
                                 </div>
                             </div>
-                            <Button>
+                            <Button component="a" href="https://patreon.com/EssentialsX">
                                 Support on Patreon...
                             </Button>
                         </div>
@@ -89,15 +101,19 @@ export default function Community() {
                             <h3 className="font-bold mb-2">EssentialsX is open source</h3>
                             <div className="flex justify-between mb-2">
                                 <div>
-                                    <p className="text-3xl font-bold">2017</p>
+                                    <p className="text-3xl font-bold w-24">
+                                        <CountUp start={0} end={github.stars} />
+                                    </p>
                                     <p className="text-sm">STARS</p>
                                 </div>
                                 <div>
-                                    <p className="text-3xl font-bold">1000</p>
+                                    <p className="text-3xl font-bold w-24">
+                                        <CountUp start={0} end={github.forks} />
+                                    </p>
                                     <p className="text-sm">FORKS</p>
                                 </div>
                             </div>
-                            <Button>
+                            <Button component="a" href="https://github.com/EssentialsX/Essentials">
                                 Visit on GitHub...
                             </Button>
                         </div>
