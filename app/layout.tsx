@@ -1,5 +1,6 @@
 import type React from "react"
 import "@mantine/core/styles.css"
+import '@mantine/code-highlight/styles.css';
 import {
     AppShell,
     AppShellHeader,
