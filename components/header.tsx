@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <Container bg="#2C2E33" size="xl" h="100%">
+        <Container bg="#2C2E33" h="100%" fluid>
             <Group justify="space-between" h="100%" px="xl">
                 <Link href="/" style={{textDecoration: "none", color: "inherit"}}>
                     <Image

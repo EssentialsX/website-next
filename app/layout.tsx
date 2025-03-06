@@ -33,7 +33,7 @@ export default function RootLayout({children}: Readonly<{
         <SharedDataProvider>
             <MantineProvider theme={theme}>
                 <AppShell header={{height: 80}}>
-                    <AppShellHeader>
+                    <AppShellHeader withBorder={false}>
                         <Header/>
                     </AppShellHeader>
                     <AppShellMain>
