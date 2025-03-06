@@ -17,6 +17,18 @@ export type ModuleType =
     | 'antibuild'
     | 'xmpp';
 
+export const moduleNames: Record<ModuleType, string> = {
+    core: "EssentialsX",
+    chat: "EssentialsXChat",
+    spawn: "EssentialsXSpawn",
+    protect: "EssentialsXProtect",
+    discord: "EssentialsXDiscord",
+    discordlink: "EssentialsXDiscordLink",
+    geoip: "EssentialsXGeoIP",
+    antibuild: "EssentialsXAntiBuild",
+    xmpp: "EssentialsXXMPP",
+}
+
 export function getModuleIdFromArtifact(name: string): ModuleType {
     const match = moduleRegex.exec(name);
     return match ? match[1].toLowerCase() as ModuleType : "core";
