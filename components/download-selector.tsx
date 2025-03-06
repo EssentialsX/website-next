@@ -5,9 +5,9 @@ import { modules } from "@/lib/modules-data";
 import { Button, Group, Loader, SegmentedControl, Stack, Text, Title } from "@mantine/core";
 import { useState } from "react";
 
-export default function DownloadSelector() {
+export default function DownloadSelector({startBranch}: { startBranch: string }) {
     const [selectedModules, setSelectedModules] = useState<string[]>(["core"]);
-    const [buildType, setBuildType] = useState("stable");
+    const [buildType, setBuildType] = useState(startBranch);
 
     const { stableBuild, devBuild } = useSharedData();
     if (!stableBuild || !devBuild) {
