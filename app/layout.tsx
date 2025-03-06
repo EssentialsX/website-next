@@ -27,6 +27,7 @@ export default function RootLayout({children}: Readonly<{
         <html lang="en" {...mantineHtmlProps}>
         <head>
             <ColorSchemeScript/>
+            <link rel="icon" href="/logo.svg"/>
         </head>
         <body>
         <SharedDataProvider>
