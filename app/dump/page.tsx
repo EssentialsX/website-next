@@ -7,9 +7,31 @@ import { DumpPaste } from "@/lib/dump-utils";
 import { Loader } from "@mantine/core";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+
+const loadingBars = (
+    <div className="flex justify-center mt-12">
+        <Loader type="bars"/>
+    </div>
+);
 
 export default function Page() {
+    return (
+        <div className="flex flex-col">
+            <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
+                <div className="max-w-6xl mx-auto text-white">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-2">EssentialsX Server Dump</h1>
+                </div>
+            </section>
+
+            <Suspense fallback={loadingBars}>
+                <DumpContent />
+            </Suspense>
+        </div>
+    );
+}
+
+function DumpContent() {
     const params = useSearchParams();
     const bytebin = params.get("bytebin");
     const [loading, setLoading] = useState(true);
@@ -35,27 +57,21 @@ export default function Page() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bytebin]);
 
-    return (
-        <div className="flex flex-col">
-            <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
-                <div className="max-w-6xl mx-auto text-white">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">EssentialsX Server Dump</h1>
-                </div>
-            </section>
+    if (bytebin === null) {
+        return <DumpMissing/>
+    }
 
-            {
-                bytebin === null ? (
-                    <DumpMissing/>
-                ) : loading ? (
-                    <div className="flex justify-center mt-12">
-                        <Loader type="bars"/>
-                    </div>
-                ) : error !== undefined ? (
-                    <DumpError error={error}/>
-                ) : dump !== undefined && (
-                    <Dump id={bytebin} dump={dump}/>
-                )
-            }
-        </div>
-    );
+    if (loading) {
+        return loadingBars;
+    }
+
+    if (error !== undefined) {
+        return <DumpError error={error} />
+    }
+
+    if (dump !== undefined) {
+        return <Dump id={bytebin} dump={dump} />
+    }
+
+    return null;
 }

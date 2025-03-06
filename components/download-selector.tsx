@@ -3,9 +3,12 @@ import { useSharedData } from "@/contexts/shared-data";
 import { moduleNames, ModuleType } from "@/lib/build-utils";
 import { modules } from "@/lib/modules-data";
 import { Button, Group, Loader, SegmentedControl, Stack, Text, Title } from "@mantine/core";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function DownloadSelector({startBranch}: { startBranch: string }) {
+export default function DownloadSelector() {
+    const params = useSearchParams();
+    const startBranch = params.get("branch") || "dev";
     const [selectedModules, setSelectedModules] = useState<string[]>(["core"]);
     const [buildType, setBuildType] = useState(startBranch);
 

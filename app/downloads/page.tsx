@@ -5,12 +5,9 @@ import { Alert, Container, Group, Stack, Text, Title, } from "@mantine/core"
 import { IconInfoCircle } from "@tabler/icons-react"
 import DownloadWarnings from "@/components/download-warnings";
 import DownloadInfo from "@/components/download-info";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function Downloads() {
-    const params = useSearchParams();
-    const startBranch = params.get("branch") || "dev";
-
     return (
         <div>
             <section style={{backgroundColor: "var(--mantine-color-red-filled)"}} className="py-12 px-12">
@@ -52,7 +49,9 @@ export default function Downloads() {
                             </a>
                         </Alert>
 
-                        <DownloadSelector startBranch={startBranch} />
+                        <Suspense>
+                            <DownloadSelector />
+                        </Suspense>
                     </Stack>
 
                     <div className="grid gap-2">
