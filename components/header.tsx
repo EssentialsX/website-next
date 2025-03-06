@@ -8,8 +8,8 @@ export default function Header() {
             <Group justify="space-between" h="100%" px="xl">
                 <Link href="/" style={{textDecoration: "none", color: "inherit"}}>
                     <Image
-                        width={180}
-                        height={40}
+                        width={196}
+                        height={32}
                         src="/logo-navbar.png"
                         alt="EssentialsX Logo"
                         className="object-contain"
