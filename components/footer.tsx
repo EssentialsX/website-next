@@ -15,11 +15,11 @@ export default function Footer() {
         <footer className="mt-2">
             <Container size="xl" py="md" px="xl">
                 <Group mb="md" justify="center">
-                    <StatBadge label="Downloads" value={`${(downloads / 1000000).toFixed(2)}m`} valueColor="#ee8a18" />
-                    <StatBadge label="Latest Release" value={stableBuild?.version ?? '??'} valueColor="#E93B38FF" />
-                    <StatBadge label="Jenkins" value={`b${devBuild?.build ?? '??'}`} valueColor="#1fab52" />
-                    <StatBadge label="Discord" value={`${(discord.members / 1000).toFixed(1)}k online`} valueColor="#7289DA" />
-                    <StatBadge label="GitHub" value={`${github.stars} stars`} valueColor="#000" />
+                    <StatBadge href="https://www.spigotmc.org/resources/essentialsx.9089" label="Downloads" value={`${(downloads / 1000000).toFixed(2)}m`} valueColor="#ee8a18" />
+                    <StatBadge href="https://github.com/EssentialsX/Essentials/releases/latest" label="Latest Release" value={stableBuild?.version ?? '??'} valueColor="#E93B38FF" />
+                    <StatBadge href="https://ci.ender.zone/job/EssentialsX" label="Jenkins" value={`b${devBuild?.build ?? '??'}`} valueColor="#1fab52" />
+                    <StatBadge href="https://discord.gg/h8CnPSw" label="Discord" value={`${(discord.members / 1000).toFixed(1)}k online`} valueColor="#7289DA" />
+                    <StatBadge href="https://github.com/EssentialsX/Essentials" label="GitHub" value={`${github.stars} stars`} valueColor="#000" />
                 </Group>
                 <Group justify="space-between" align="center">
                     <Text size="sm" c="dimmed">
