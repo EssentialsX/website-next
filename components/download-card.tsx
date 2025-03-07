@@ -28,7 +28,7 @@ export default function DownloadCard({module, version, download, toggle, isSelec
                 dark:bg-black
                 not-dark:bg-white
                 ${isSelecting
-                ? 'scale-[1.02] border-2 border-blue-200'
+                ? 'scale-[1.02]'
                 : ''
             }
             `}
@@ -162,7 +162,7 @@ export default function DownloadCard({module, version, download, toggle, isSelec
                     duration-300 
                     ease-in-out
                     ${isSelecting
-                    ? 'scale-110 rotate-6 shadow-lg'
+                    ? 'scale-110 shadow-lg'
                     : ''
                 }
                 `}
