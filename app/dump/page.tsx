@@ -8,6 +8,7 @@ import { Loader } from "@mantine/core";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import PageHeader from "@/components/page-header";
 
 const loadingBars = (
     <div className="flex justify-center mt-12">
@@ -18,11 +19,9 @@ const loadingBars = (
 export default function Page() {
     return (
         <div className="flex flex-col">
-            <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
-                <div className="max-w-6xl mx-auto text-white">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">EssentialsX Server Dump</h1>
-                </div>
-            </section>
+            <PageHeader
+                title="EssentialsX Server Dump"
+            />
 
             <Suspense fallback={loadingBars}>
                 <DumpContent />

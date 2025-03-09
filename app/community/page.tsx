@@ -3,21 +3,17 @@
 import { Button } from "@mantine/core";
 import { useSharedData } from "@/contexts/shared-data";
 import CountUp from "react-countup";
+import PageHeader from "@/components/page-header";
 
 export default function Community() {
     const { discord, patreon, github } = useSharedData();
 
     return (
         <div className="flex flex-col">
-            <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
-                <div className="max-w-6xl mx-auto text-white">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">Join the EssentialsX community</h1>
-                    <p className="text-lg">
-                        Need support with EssentialsX, or just want to chat about servers and plugins?
-                        We&apos;ve got you covered.
-                    </p>
-                </div>
-            </section>
+            <PageHeader
+                title="Join the EssentialsX community"
+                description="Need support with EssentialsX, or just want to chat about servers and plugins? We've got you covered."
+            />
 
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="grid md:grid-cols-3 gap-8">

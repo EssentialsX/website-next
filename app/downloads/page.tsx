@@ -1,26 +1,20 @@
 "use client"
 
 import DownloadSelector from "@/components/download-selector";
-import { Alert, Container, Group, Stack, Text, Title, } from "@mantine/core"
+import { Alert, Container, Group, Stack,  } from "@mantine/core"
 import { IconInfoCircle } from "@tabler/icons-react"
 import DownloadWarnings from "@/components/download-warnings";
 import DownloadInfo from "@/components/download-info";
 import { Suspense } from "react";
+import PageHeader from "@/components/page-header";
 
 export default function Downloads() {
     return (
         <div>
-            <section style={{backgroundColor: "var(--mantine-color-red-filled)"}} className="py-12 px-12">
-                <Container size="xl">
-                    <Title order={1} c="white">
-                        Download EssentialsX
-                    </Title>
-                    <Text size="lg" c="white" mt="sm">
-                        Get bleeding edge builds of EssentialsX and add-ons, including the latest features and bug
-                        fixes.
-                    </Text>
-                </Container>
-            </section>
+            <PageHeader
+                title="Download EssentialsX"
+                description="Get bleeding edge builds of EssentialsX and add-ons, including the latest features and bug fixes."
+            />
 
             <Container size="xl" mt="md">
                 <Group align="flex-start">

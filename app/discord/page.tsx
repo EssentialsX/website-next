@@ -2,19 +2,15 @@
 
 import DiscordAuthorize from "@/components/discord-authorize";
 import { Stack, Title } from "@mantine/core";
+import PageHeader from "@/components/page-header";
 
 export default function Discord() {
     return (
         <div className="flex flex-col">
-            <section className="bg-primary py-12 px-12" style={{backgroundColor: "#D11920"}}>
-                <div className="max-w-6xl mx-auto text-white">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">Authorize EssentialsX Discord Bot</h1>
-                    <p className="text-lg">
-                        Enter the client ID from the Discord Developers site
-                        into the box below to add your bot to your Discord server.
-                    </p>
-                </div>
-            </section>
+            <PageHeader
+                title="Authorize EssentialsX Discord Bot"
+                description="Enter the client ID from the Discord Developers site into the box below to add your bot to your Discord server."
+            />
 
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <Stack>
