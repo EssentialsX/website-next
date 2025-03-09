@@ -23,9 +23,11 @@ export default function Page() {
                 title="EssentialsX Server Dump"
             />
 
-            <Suspense fallback={loadingBars}>
-                <DumpContent />
-            </Suspense>
+            <div className="lg:px-28">
+                <Suspense fallback={loadingBars}>
+                    <DumpContent />
+                </Suspense>
+            </div>
         </div>
     );
 }
