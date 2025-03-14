@@ -29,11 +29,11 @@ export default function Commands() {
 
     const allCommands = {
         "Essentials": core,
-        "EssentialsChat": chat,
-        "EssentialsSpawn": spawn,
-        "EssentialsDiscord": discord,
-        "EssentialsDiscordLink": discordlink,
-        "EssentialsXMPP": xmpp
+        "Chat": chat,
+        "Spawn": spawn,
+        "Discord": discord,
+        "Discord Link": discordlink,
+        "XMPP": xmpp
     }
 
     // Toggle expanded row
@@ -48,7 +48,7 @@ export default function Commands() {
                 description="EssentialsX commands reference."
             />
 
-            <div className="mx-16">
+            <div className="xl:mx-16">
                 <Table>
                     <TableThead>
                         <TableTr>
@@ -56,7 +56,7 @@ export default function Commands() {
                             <TableTh>Command</TableTh>
                             <TableTh>Aliases</TableTh>
                             <TableTh>Description</TableTh>
-                            <TableTh>Syntax</TableTh>
+                            <TableTh>Usage(s)</TableTh>
                         </TableTr>
                     </TableThead>
                     <TableTbody>
@@ -65,23 +65,36 @@ export default function Commands() {
                                 <Fragment key={cmd}>
                                     <TableTr>
                                         <TableTd>
-                                            <Badge>{mod}</Badge>
+                                            <Badge fullWidth>{mod}</Badge>
                                         </TableTd>
-                                        <TableTd className="prose dark:prose-invert flex">
-                                            <code>/{cmd}</code>
+                                        <TableTd className="prose dark:prose-invert">
+                                            <code className="text-xs">/{cmd}</code>
                                         </TableTd>
                                         <TableTd>
-                                            <ExpandableList items={obj.aliases.map((alias) => `/${alias}`)} />
+                                            <ExpandableList
+                                                items={obj.aliases
+                                                    .sort((a, b) => a.length - b.length)
+                                                    .map((alias) => `/${alias}`)}
+                                            />
                                         </TableTd>
                                         <TableTd>
                                             {obj.description}
                                         </TableTd>
                                         <TableTd
-                                            className="prose dark:prose-invert flex cursor-pointer"
+                                            className="prose dark:prose-invert cursor-pointer flex"
                                             onClick={() => toggleRow(cmd)}
                                         >
-                                            <code>/{cmd}{obj.usage.slice(10)}</code>
-                                            <Button size="xs" px={2}>
+                                            <code
+                                                className="text-xs break-all flex items-center"
+                                                style={{ borderStartEndRadius: 0, borderBottomRightRadius: 0 }}
+                                            >
+                                                /{cmd}{obj.usage.slice(10)}
+                                            </code>
+                                            <Button
+                                                px={2}
+                                                h="inherit"
+                                                style={{ borderStartStartRadius: 0, borderBottomLeftRadius: 0 }}
+                                            >
                                                 <IconSelector size={14} />
                                             </Button>
                                         </TableTd>
@@ -94,7 +107,15 @@ export default function Commands() {
                                                 withBorder
                                                 shadow="sm"
                                             >
-
+                                                <h3>Usages</h3>
+                                                <ul>
+                                                    {obj.usages.map((line, index) => (
+                                                        <li key={index}>
+                                                            <code className="text-xs">{line.usage}</code>
+                                                            <p className="text-xs">{line.description}</p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </Paper>
                                         </TableTd>
                                     </Collapse>
