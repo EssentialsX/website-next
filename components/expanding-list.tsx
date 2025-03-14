@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Group, Collapse, ActionIcon, Text } from '@mantine/core';
+import { Box, Group, Collapse, Text, Button } from '@mantine/core';
 import {  IconChevronUp, IconSelector } from '@tabler/icons-react';
 
 export default function ExpandingList({ items }: { items: string[] }) {
@@ -10,20 +10,18 @@ export default function ExpandingList({ items }: { items: string[] }) {
     return (
         <Box w="100%" p={0} m={0}>
             <Group
-                p={4}
-                gap="xs"
+                gap={0}
                 wrap="nowrap"
                 align="center"
-                justify="apart"
                 onClick={toggle}
-                className="cursor-pointer"
+                className="prose dark:prose-invert"
             >
-                <Text size="sm" lineClamp={1}>
+                <code>
                     {items.length > 0 ? items[0] : 'None'}
-                </Text>
-                <ActionIcon disabled={items.length < 2} size="xs" style={{ flexShrink: 0 }}>
+                </code>
+                <Button disabled={items.length < 2} size="xs" px={2}>
                     {opened ? <IconChevronUp size={14} /> : <IconSelector size={14} />}
-                </ActionIcon>
+                </Button>
             </Group>
 
             <Collapse in={opened}>
