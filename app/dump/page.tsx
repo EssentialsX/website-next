@@ -4,6 +4,7 @@ import Dump from "@/components/dump/dump";
 import DumpError from "@/components/dump/dump-error";
 import DumpMissing from "@/components/dump/dump-missing";
 import { DumpPaste } from "@/lib/dump-utils";
+import { CodeHighlightAdapterProvider, createShikiAdapter } from "@mantine/code-highlight";
 import { Loader } from "@mantine/core";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
@@ -16,6 +17,18 @@ const loadingBars = (
     </div>
 );
 
+async function loadShiki() {
+    const { createHighlighter } = await import('shiki');
+    const shiki = await createHighlighter({
+        langs: ['plaintext', 'json', 'log', 'yml'],
+        themes: [],
+    });
+
+    return shiki;
+}
+
+const shikiAdapter = createShikiAdapter(loadShiki);
+
 export default function Page() {
     return (
         <div className="flex flex-col">
@@ -25,7 +38,9 @@ export default function Page() {
 
             <div className="lg:px-28">
                 <Suspense fallback={loadingBars}>
-                    <DumpContent />
+                    <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+                        <DumpContent />
+                    </CodeHighlightAdapterProvider>
                 </Suspense>
             </div>
         </div>

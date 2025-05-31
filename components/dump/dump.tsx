@@ -107,7 +107,7 @@ export default function Dump({id, dump}: { id: string, dump: DumpPaste }) {
 
                 {
                     logData !== undefined && (
-                        <DumpFileCard title="Latest Log" content={logData} language="sh"/>
+                        <DumpFileCard title="Latest Log" content={logData} language="log"/>
                     )
                 }
 
