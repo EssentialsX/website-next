@@ -1,129 +1,198 @@
-"use client";
+'use client';
 
-import React, { Fragment, useState } from "react";
-import ExpandableList from "@/components/expanding-list";
-import PageHeader from "@/components/page-header";
-import {
-    Badge,
-    Button,
-    Collapse,
-    Paper,
-    Table,
-    TableTbody,
-    TableTd,
-    TableTh,
-    TableThead,
-    TableTr
-} from "@mantine/core";
-import { IconSelector } from "@tabler/icons-react";
+import CommandAliases from '@/components/command-aliases';
+import CommandUsages from '@/components/command-usages';
+import PageHeader from '@/components/page-header';
+import { Command, CommandData } from '@/lib/types';
+import { Badge, Button } from '@mantine/core';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Fragment, useEffect, useState } from 'react';
 
-import core from "@/lib/EssentialsX-commands.json"
-import chat from "@/lib/EssentialsXChat-commands.json"
-import spawn from "@/lib/EssentialsXSpawn-commands.json"
-import discord from "@/lib/EssentialsXDiscord-commands.json"
-import discordlink from "@/lib/EssentialsXDiscordLink-commands.json"
-import xmpp from "@/lib/EssentialsXXMPP-commands.json"
+import core from '@/lib/EssentialsX-commands.json';
+import chat from '@/lib/EssentialsXChat-commands.json';
+import discord from '@/lib/EssentialsXDiscord-commands.json';
+import discordlink from '@/lib/EssentialsXDiscordLink-commands.json';
+import spawn from '@/lib/EssentialsXSpawn-commands.json';
+import xmpp from '@/lib/EssentialsXXMPP-commands.json';
+import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
+import { Entries } from 'type-fest';
 
 export default function Commands() {
-    const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [allCommands, setAllCommands] = useState<Record<string, CommandData>>(
+    {},
+  );
+  const [loading, setLoading] = useState(true);
 
-    const allCommands = {
-        "Essentials": core,
-        "Chat": chat,
-        "Spawn": spawn,
-        "Discord": discord,
-        "Discord Link": discordlink,
-        "XMPP": xmpp
-    }
+  useEffect(() => {
+    const loadCommands = async () => {
+      try {
+        const commandData = {
+          Essentials: core as CommandData,
+          Chat: chat as CommandData,
+          Spawn: spawn as CommandData,
+          Discord: discord as CommandData,
+          'Discord Link': discordlink as CommandData,
+          XMPP: xmpp as CommandData,
+        };
 
-    // Toggle expanded row
-    const toggleRow = (id: string) => {
-        setExpandedRow(expandedRow === id ? null : id);
+        setAllCommands(commandData);
+      } catch (error) {
+        console.error('Failed to load commands:', error);
+        setAllCommands({});
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return (
-        <div className="flex flex-col">
-            <PageHeader
-                title="Commands"
-                description="EssentialsX commands reference."
-            />
+    loadCommands();
+  }, []);
 
-            <div className="xl:mx-16">
-                <Table>
-                    <TableThead>
-                        <TableTr>
-                            <TableTh>Module</TableTh>
-                            <TableTh>Command</TableTh>
-                            <TableTh>Aliases</TableTh>
-                            <TableTh>Description</TableTh>
-                            <TableTh>Usage(s)</TableTh>
-                        </TableTr>
-                    </TableThead>
-                    <TableTbody>
-                        {Object.entries(allCommands).map(([mod, cmds]) =>
-                            Object.entries(cmds).map(([cmd, obj]) => (
-                                <Fragment key={cmd}>
-                                    <TableTr>
-                                        <TableTd>
-                                            <Badge fullWidth>{mod}</Badge>
-                                        </TableTd>
-                                        <TableTd className="prose dark:prose-invert">
-                                            <code className="text-xs">/{cmd}</code>
-                                        </TableTd>
-                                        <TableTd>
-                                            <ExpandableList
-                                                items={obj.aliases
-                                                    .sort((a, b) => a.length - b.length)
-                                                    .map((alias) => `/${alias}`)}
-                                            />
-                                        </TableTd>
-                                        <TableTd>
-                                            {obj.description}
-                                        </TableTd>
-                                        <TableTd
-                                            className="prose dark:prose-invert cursor-pointer flex"
-                                            onClick={() => toggleRow(cmd)}
-                                        >
-                                            <code
-                                                className="text-xs break-all flex items-center"
-                                                style={{ borderStartEndRadius: 0, borderBottomRightRadius: 0 }}
-                                            >
-                                                /{cmd}{obj.usage.slice(10)}
-                                            </code>
-                                            <Button
-                                                px={2}
-                                                h="inherit"
-                                                style={{ borderStartStartRadius: 0, borderBottomLeftRadius: 0 }}
-                                            >
-                                                <IconSelector size={14} />
-                                            </Button>
-                                        </TableTd>
-                                    </TableTr>
-                                    <Collapse in={expandedRow === cmd} component={TableTr}>
-                                        <TableTd colSpan={5} className="p-0">
-                                            <Paper
-                                                p="md"
-                                                m={16}
-                                                withBorder
-                                                shadow="sm"
-                                            >
-                                                <h3>Usages</h3>
-                                                <ul>
-                                                    {obj.usages.map((line, index) => (
-                                                        <li key={index}>
-                                                            <code className="text-xs">{line.usage}</code>
-                                                            <p className="text-xs">{line.description}</p>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </Paper>
-                                        </TableTd>
-                                    </Collapse>
-                                </Fragment>
-                        )))}
-                    </TableTbody>
-                </Table>
-            </div>
+  const [openRow, setOpenRow] = useState<string>('');
+  const toggleRow = (cmd: string) => {
+    setOpenRow(prev => (prev === cmd ? '' : cmd));
+  };
+
+  if (loading) {
+    return (
+      <div className='flex flex-col min-h-screen'>
+        <PageHeader
+          title='Commands'
+          description='EssentialsX commands reference.'
+        />
+        <div className='flex-1 container mx-auto px-4 py-8 flex items-center justify-center'>
+          <div className='text-center'>
+            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4'></div>
+            <p>Loading commands...</p>
+          </div>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className='flex flex-col min-h-screen'>
+      <PageHeader
+        title='Commands'
+        description='EssentialsX commands reference.'
+      />
+      <div className='flex-1 container mx-auto px-4 py-8'>
+        <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
+          <div className='w-full'>
+            <div className='grid grid-cols-5 gap-4 p-4 border-b font-semibold text-sm'>
+              <div>Module</div>
+              <div>Command</div>
+              <div>Aliases</div>
+              <div>Description</div>
+              <div>Usage(s)</div>
+            </div>
+
+            <div>
+              {Object.entries(allCommands).map(([mod, cmds]) =>
+                (Object.entries(cmds) as Entries<Record<string, Command>>).map(
+                  ([cmd, obj]: [string, Command]) => (
+                    <Fragment key={cmd}>
+                      <div className='border-b'>
+                        <div className='grid grid-cols-5 gap-4 p-4 items-center'>
+                          <div className='flex items-center'>
+                            <Badge variant='secondary' className='text-xs'>
+                              {mod}
+                            </Badge>
+                          </div>
+
+                          <div className='flex items-center text-sm prose dark:prose-invert'>
+                            <code className='px-2 py-1 rounded text-xs'>
+                              /{cmd}
+                            </code>
+                          </div>
+
+                          <div className='prose dark:prose-invert'>
+                            {obj.aliases.length === 0 ?
+                              <span className='text-sm'>None</span>
+                            : obj.aliases.length === 1 ?
+                              <code className='text-xs px-1 py-0.5 rounded'>
+                                {obj.aliases[0]}
+                              </code>
+                            : <div className='gap-1'>
+                                <code className='text-xs px-1 py-0.5 rounded'>
+                                  {obj.aliases[0]}
+                                </code>
+                                <Button
+                                  variant='transparent'
+                                  size='sm'
+                                  px={4}
+                                  className='!cursor-default'
+                                >
+                                  <IconChevronRight className='h-4 w-4' />
+                                </Button>
+                                {obj.aliases.length > 1 && (
+                                  <span className='text-xs text-muted-foreground'>
+                                    +{obj.aliases.length - 1} more
+                                  </span>
+                                )}
+                              </div>
+                            }
+                          </div>
+
+                          <div className='text-sm flex items-center'>
+                            {obj.description || 'None'}
+                          </div>
+
+                          <div className='flex items-center gap-2 prose dark:prose-invert'>
+                            <code className='px-2 py-1 rounded text-xs flex-1 truncate'>
+                              /{cmd}
+                              {obj.usage ? obj.usage.slice(10) : ''}
+                            </code>
+                            {(obj.usages?.length > 0 ||
+                              obj.aliases?.length > 1) && (
+                              <Button
+                                variant='subtle'
+                                size='xs'
+                                px={4}
+                                className='flex-shrink-0 transition-all duration-200 hover:scale-105'
+                                onClick={() => toggleRow(cmd)}
+                              >
+                                <motion.div
+                                  animate={{
+                                    rotate: openRow === cmd ? 180 : 0,
+                                  }}
+                                  transition={{
+                                    duration: 0.2,
+                                    ease: 'easeInOut',
+                                  }}
+                                >
+                                  <IconChevronDown className='h-4 w-4' />
+                                </motion.div>
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+
+                        <AnimatePresence>
+                          {openRow === cmd && (
+                            <motion.div className='flex flex-row gap-0 justify-end items-center'>
+                              {obj.aliases?.length > 1 && (
+                                <div>
+                                  <CommandAliases aliases={obj.aliases} />
+                                </div>
+                              )}
+
+                              {obj.usages?.length > 0 && (
+                                <div>
+                                  <CommandUsages usages={obj.usages} />
+                                </div>
+                              )}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </Fragment>
+                  ),
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
