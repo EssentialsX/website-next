@@ -35,7 +35,7 @@ export default function Home() {
               <Text mb='md'>
                 With over{' '}
                 <Link href='/commands' className='link hover:underline'>
-                  130 commands
+                  160 commands
                 </Link>
                 , EssentialsX provides one of the most comprehensive feature
                 sets out there, providing teleportation, moderation tools,
