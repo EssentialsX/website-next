@@ -1,24 +1,25 @@
-import React from "react";
-import WikiSidebar from "@/components/wiki-sidebar";
-import { Container } from "@mantine/core";
+import WikiSidebar from '@/components/wiki-sidebar';
+import { Container } from '@mantine/core';
+import React from 'react';
 
-export default function WikiLayout({children}: { children: React.ReactNode }) {
+export default function WikiLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className='mt-8'>
+      <Container size='lg'>
+        <div className='flex flex-col md:flex-row gap-8'>
+          <div className='md:w-1/4'>
+            <WikiSidebar />
+          </div>
 
-    return (
-        <div className="mt-8">
-            <Container size="lg">
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="md:w-1/4">
-                        <WikiSidebar/>
-                    </div>
-
-                    <div className="md:w-3/4">
-                        <div className="prose dark:prose-invert max-w-none">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-            </Container>
+          <div className='md:w-3/4'>
+            <div className='prose dark:prose-invert max-w-none'>{children}</div>
+          </div>
         </div>
-    )
+      </Container>
+    </div>
+  );
 }

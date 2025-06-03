@@ -17,14 +17,14 @@ These files support [Keywords](/wiki/keywords) as placeholders.
 
 There are several files you can use. Most of these are created when the corresponding command is run (with the exception of `help.txt`):
 
-| File name          | Usage                                                                                   |
-|--------------------|-----------------------------------------------------------------------------------------|
-| `book.txt`         | Used to define custom book contents - see below                                         |
-| `custom.txt`       | Displayed when a user runs `/customtext` - we recommend custom command aliases for this |
-| `help.txt`         | If this file exists, it will override the contents of `/help` (by default this is your server's command list) |
-| `info.txt`         | Displayed when a user runs `/info`                                                      |
-| `motd.txt`         | Displayed when a user joins with the `essentials.motd` permission and in `/motd`        |
-| `rules.txt`        | Displayed when a user runs `/rules`                                                     |
+| File name    | Usage                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| `book.txt`   | Used to define custom book contents - see below                                                               |
+| `custom.txt` | Displayed when a user runs `/customtext` - we recommend custom command aliases for this                       |
+| `help.txt`   | If this file exists, it will override the contents of `/help` (by default this is your server's command list) |
+| `info.txt`   | Displayed when a user runs `/info`                                                                            |
+| `motd.txt`   | Displayed when a user joins with the `essentials.motd` permission and in `/motd`                              |
+| `rules.txt`  | Displayed when a user runs `/rules`                                                                           |
 
 ## Creating text commands with multiple pages
 
@@ -51,6 +51,7 @@ When a chapter overflows the text box, EssentialsX will split it into multiple p
 Custom books can be created and edited similarly to custom text commands.
 
 First, similar to chapters above, create a new chapter inside `book.txt` for your book:
+
 ```
 (...)
 
@@ -62,9 +63,9 @@ Tales of his epic journey spread far and wide, capturing the imaginations of pla
 
 You can then use the `book:<chapter>` ItemMeta tag to create this book:
 
-* `/give mdcfe writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
-* `/item writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
-* In `kits.yml`: `- writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
+- `/give mdcfe writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
+- `/item writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
+- In `kits.yml`: `- writtenbook 1 title:JRoy's_Adventure author:Chester book:story`
 
 ## Customising `/help`
 

@@ -3,10 +3,6 @@
 import CommandAliases from '@/components/command-aliases';
 import CommandUsages from '@/components/command-usages';
 import PageHeader from '@/components/page-header';
-import { Command, CommandData } from '@/lib/types';
-import { Badge, Button } from '@mantine/core';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Fragment, useEffect, useState } from 'react';
 
 import core from '@/lib/EssentialsX-commands.json';
 import chat from '@/lib/EssentialsXChat-commands.json';
@@ -14,7 +10,11 @@ import discord from '@/lib/EssentialsXDiscord-commands.json';
 import discordlink from '@/lib/EssentialsXDiscordLink-commands.json';
 import spawn from '@/lib/EssentialsXSpawn-commands.json';
 import xmpp from '@/lib/EssentialsXXMPP-commands.json';
+import { Command, CommandData } from '@/lib/types';
+import { Badge, Button } from '@mantine/core';
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
 
 export default function Commands() {
