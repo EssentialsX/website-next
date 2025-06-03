@@ -34,12 +34,9 @@ export default function Home() {
               </Title>
               <Text mb='md'>
                 With over{' '}
-                <a
-                  href='https://essinfo.xeya.me/commands.html'
-                  className='link hover:underline'
-                >
+                <Link href='/commands' className='link hover:underline'>
                   130 commands
-                </a>
+                </Link>
                 , EssentialsX provides one of the most comprehensive feature
                 sets out there, providing teleportation, moderation tools,
                 gameplay enhancements and more.
