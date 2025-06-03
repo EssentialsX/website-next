@@ -16,7 +16,7 @@ export default function Home() {
             </Title>
             <Text c='white' size='lg'>
               EssentialsX is the essential plugin suite for Minecraft servers,
-              with over 130 commands for servers of all size and scale.
+              with over 160 commands for servers of all size and scale.
             </Text>
           </div>
         </Container>

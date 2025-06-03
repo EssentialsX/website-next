@@ -69,11 +69,16 @@ export default function Commands() {
     );
   }
 
+  const commandsCount = Object.values(allCommands).reduce(
+    (count, cmds) => count + Object.keys(cmds).length,
+    0,
+  );
+
   return (
     <div className='flex flex-col min-h-screen'>
       <PageHeader
         title='Commands'
-        description='EssentialsX commands reference.'
+        description={`EssentialsX commands reference for ${commandsCount} commands.`}
       />
       <div className='flex-1 container mx-auto px-4 py-8'>
         <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
