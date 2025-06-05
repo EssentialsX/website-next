@@ -78,7 +78,10 @@ export default function Commands() {
       if (id) {
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          const headerOffset = 80;
+          const y =
+            el.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }
     }
@@ -159,6 +162,7 @@ export default function Commands() {
                           <div
                             className='border-b border-gray-200 dark:border-gray-700'
                             id={cmd}
+                            style={{ scrollMarginTop: '80px' }}
                           >
                             <div className='grid grid-cols-5 gap-4 p-4 items-center'>
                               <div className='flex items-center'>
