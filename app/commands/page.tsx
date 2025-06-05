@@ -22,13 +22,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
 
-function sortAliases(aliases: string[]): string[] {
-  const set = new Set(aliases);
+function sortAliases(command: string, aliases: string[]): string[] {
+  const set = new Set([...aliases, command]);
   return [...aliases].sort((a, b) => {
     const aIsE = a.startsWith('e') && set.has(a.slice(1));
     const bIsE = b.startsWith('e') && set.has(b.slice(1));
-    if (aIsE === bIsE) return a.localeCompare(b);
-    return aIsE ? 1 : -1;
+    if (aIsE !== bIsE) return aIsE ? 1 : -1;
+    if (a.length !== b.length) return a.length - b.length;
+    return a.localeCompare(b);
   });
 }
 
@@ -69,6 +70,19 @@ export default function Commands() {
 
   const [search, setSearch] = useState('');
   const [moduleFilter, setModuleFilter] = useState<string | null>(null);
+
+  // Scroll to anchor once commands are loaded
+  useEffect(() => {
+    if (!loading && typeof window !== 'undefined') {
+      const id = window.location.hash.slice(1);
+      if (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }, [loading]);
 
   if (loading) {
     return (
@@ -139,7 +153,7 @@ export default function Commands() {
                         ),
                     )
                     .map(([cmd, obj]: [string, Command]) => {
-                      const sortedAliases = sortAliases(obj.aliases);
+                      const sortedAliases = sortAliases(cmd, obj.aliases);
                       return (
                         <Fragment key={cmd}>
                           <div
