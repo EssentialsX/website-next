@@ -54,7 +54,7 @@ export default function PermissionSets({
                 transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
                 className='prose dark:prose-invert'
               >
-                <code className='text-xs bg-background px-2 py-1 rounded block transition-colors duration-200'>
+                <code className='text-xs bg-background px-2 py-1 rounded inline-block w-fit transition-colors duration-200'>
                   {perm}
                 </code>
               </motion.div>
