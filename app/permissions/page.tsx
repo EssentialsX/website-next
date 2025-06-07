@@ -14,7 +14,6 @@ import { IconChevronDown, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
-import PermissionSet from '@/components/permission-set';
 
 export default function Permissions() {
   const [allPermissions, setAllPermissions] = useState<
@@ -152,7 +151,29 @@ export default function Permissions() {
                                   {mod}
                                 </Badge>
                               </div>
-                                  <PermissionSet childrenPerms={children} />
+                              <div className='flex items-center text-sm prose dark:prose-invert'>
+                                <code className='px-2 py-1 rounded text-xs'>
+                                  {perm}
+                                </code>
+                                {hasChildren && (
+                                  <Badge
+                                    variant='secondary'
+                                    className='ml-2 text-xs whitespace-nowrap'
+                                  >
+                                    Permission Group
+                                  </Badge>
+                                )}
+                              </div>
+                              <div className='text-sm'>
+                                {obj.description || 'None'}
+                              </div>
+                              <div className='flex items-center gap-2 text-sm'>
+                                <span>{formatDefault(obj.default)}</span>
+                                {hasChildren && (
+                                  <Button
+                                    variant='subtle'
+                                    size='xs'
+                                    px={4}
                                     className='flex-shrink-0 transition-all duration-200 hover:scale-105'
                                     onClick={() => toggleRow(rowKey)}
                                   >

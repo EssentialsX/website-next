@@ -1,7 +1,1 @@
-{
-  "essentials.discord.unlink": {
-    "description": "Unlink Discord account.",
-    "default": false,
-    "children": {}
-  }
-}
+{"essentials.link":{"default":"op","description":"Allows access to the /link command","children":{}},"essentials.unlink":{"default":"op","description":"Allows access to the /unlink command","children":{}}}
