@@ -9,3 +9,11 @@ export type Command = {
 };
 
 export type CommandData = Record<string, Command>;
+
+export type Permission = {
+  description: string;
+  default: 'op' | 'noop' | boolean;
+  children: Record<string, boolean>;
+};
+
+export type PermissionData = Record<string, Permission>;
