@@ -48,6 +48,21 @@ export default function Permissions() {
     setOpenRow(prev => (prev === perm ? '' : perm));
   };
 
+  const formatDefault = (value: 'op' | 'noop' | boolean) => {
+    switch (value) {
+      case 'op':
+        return 'Operators';
+      case 'noop':
+        return 'Everyone but Operators';
+      case true:
+        return 'Everyone';
+      case false:
+        return 'Nobody';
+      default:
+        return String(value);
+    }
+  };
+
   if (loading) {
     return (
       <div className='flex flex-col min-h-screen'>
@@ -129,17 +144,17 @@ export default function Permissions() {
                                 </div>
                                 <div className='flex items-center text-sm prose dark:prose-invert'>
                                   <code className='px-2 py-1 rounded text-xs'>{perm}</code>
+                                  {hasChildren && (
+                                    <Badge variant='secondary' className='ml-2 text-xs whitespace-nowrap'>
+                                      permission set ({children.length})
+                                    </Badge>
+                                  )}
                                 </div>
                                 <div className='text-sm'>
                                   {obj.description || 'None'}
-                                  {hasChildren && (
-                                    <span className='ml-2 text-xs text-muted-foreground'>
-                                      permission set ({children.length} permissions)
-                                    </span>
-                                  )}
                                 </div>
                                 <div className='flex items-center gap-2 text-sm'>
-                                  <span>{String(obj.default)}</span>
+                                  <span>{formatDefault(obj.default)}</span>
                                   {hasChildren && (
                                     <Button
                                       variant='subtle'
@@ -179,7 +194,7 @@ export default function Permissions() {
                                         <div className='text-sm'>
                                           {val ? 'Inherits parent permission' : 'Inherits inverse of parent permission'}
                                         </div>
-                                        <div className='text-sm'>{String(val)}</div>
+                                        <div className='text-sm'>{formatDefault(val)}</div>
                                       </div>
                                     ))}
                                   </motion.div>
