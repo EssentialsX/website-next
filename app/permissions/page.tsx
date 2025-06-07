@@ -157,8 +157,8 @@ export default function Permissions() {
                                     onClick={() => toggleRow(rowKey)}
                                   >
                                     <motion.div
-                      }))
-              }
+                                      animate={{
+                                        rotate: openRow === rowKey ? 180 : 0,
                                       }}
                                       transition={{
                                         duration: 0.2,
