@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 
 export default function CommandUsages({
+  commandName,
   usages,
 }: {
+  commandName: string;
   usages: { usage: string; description: string }[];
 }) {
   return (
@@ -80,7 +82,8 @@ export default function CommandUsages({
                 className='space-y-1 prose dark:prose-invert'
               >
                 <code className='text-xs bg-background px-2 py-1 rounded block transition-colors duration-200'>
-                  {usage.usage}
+                  /{commandName}
+                  {usage.usage.slice(10)}
                 </code>
                 {usage.description && (
                   <motion.p

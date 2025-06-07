@@ -259,7 +259,10 @@ export default function Commands() {
 
                                   {obj.usages?.length > 0 && (
                                     <div className='w-full'>
-                                      <CommandUsages usages={obj.usages} />
+                                      <CommandUsages
+                                        commandName={cmd}
+                                        usages={obj.usages}
+                                      />
                                     </div>
                                   )}
                                 </motion.div>
