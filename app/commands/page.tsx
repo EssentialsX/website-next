@@ -179,10 +179,7 @@ export default function Commands() {
                                   <code className='px-2 py-1 rounded text-xs'>
                                     /{cmd}
                                   </code>
-                                  <IconHash
-                                    size={14}
-                                    className='text-muted-foreground'
-                                  />
+                                  <IconHash size={14} />
                                 </a>
                               </div>
 
@@ -206,7 +203,7 @@ export default function Commands() {
                                       <IconChevronRight className='h-4 w-4' />
                                     </Button>
                                     {sortedAliases.length > 1 && (
-                                      <span className='text-xs text-muted-foreground'>
+                                      <span className='text-xs'>
                                         +{sortedAliases.length - 1} more
                                       </span>
                                     )}

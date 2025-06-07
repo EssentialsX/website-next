@@ -176,10 +176,7 @@ export default function Permissions() {
                                   <code className='px-2 py-1 rounded text-xs'>
                                     {perm}
                                   </code>
-                                  <IconHash
-                                    size={14}
-                                    className='text-muted-foreground'
-                                  />
+                                  <IconHash size={14} />
                                 </a>
                                 {hasChildren && (
                                   <Badge
