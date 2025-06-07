@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 
 export default function CommandUsages({
+  commandName,
   usages,
 }: {
+  commandName: string;
   usages: { usage: string; description: string }[];
 }) {
   return (
@@ -64,10 +66,10 @@ export default function CommandUsages({
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.2, delay: 0.2 }}
-          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4'
+          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full max-w-none'
         >
           <h4 className='font-semibold mb-3 text-sm'>Usage Examples</h4>
-          <div className='space-y-3'>
+          <div className='grid gap-3 sm:grid-cols-2'>
             {usages.map((usage, usageIndex) => (
               <motion.div
                 key={usageIndex}
@@ -80,7 +82,8 @@ export default function CommandUsages({
                 className='space-y-1 prose dark:prose-invert'
               >
                 <code className='text-xs bg-background px-2 py-1 rounded block transition-colors duration-200'>
-                  {usage.usage}
+                  /{commandName}
+                  {usage.usage.slice(10)}
                 </code>
                 {usage.description && (
                   <motion.p

@@ -250,16 +250,19 @@ export default function Commands() {
 
                             <AnimatePresence>
                               {openRow === cmd && (
-                                <motion.div className='flex flex-row gap-0 justify-end items-center'>
+                                <motion.div className='flex flex-col w-full'>
                                   {sortedAliases.length > 1 && (
-                                    <div>
+                                    <div className='w-full'>
                                       <CommandAliases aliases={sortedAliases} />
                                     </div>
                                   )}
 
                                   {obj.usages?.length > 0 && (
-                                    <div>
-                                      <CommandUsages usages={obj.usages} />
+                                    <div className='w-full'>
+                                      <CommandUsages
+                                        commandName={cmd}
+                                        usages={obj.usages}
+                                      />
                                     </div>
                                   )}
                                 </motion.div>

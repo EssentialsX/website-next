@@ -60,10 +60,10 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.2, delay: 0.2 }}
-          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 ml-8'
+          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full max-w-none'
         >
           <h4 className='font-semibold mb-3 text-sm'>Command Aliases</h4>
-          <div className='grid grid-cols-4 space-x-2 space-y-3'>
+          <div className='flex flex-wrap gap-2'>
             {aliases.map((alias, usageIndex) => (
               <motion.div
                 key={usageIndex}
@@ -73,9 +73,8 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
                   duration: 0.3,
                   delay: 0.2 + usageIndex * 0.1,
                 }}
-                className='space-y-1 prose dark:prose-invert'
               >
-                <code className='text-xs bg-background px-2 py-1 rounded block transition-colors duration-200'>
+                <code className='text-xs bg-background px-1 py-0.5 rounded transition-colors duration-200'>
                   /{alias}
                 </code>
               </motion.div>
