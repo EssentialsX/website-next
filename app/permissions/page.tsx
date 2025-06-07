@@ -152,18 +152,20 @@ export default function Permissions() {
                                   {mod}
                                 </Badge>
                               </div>
-                              <div className='flex flex-col items-start text-sm prose dark:prose-invert'>
-                                <code className='px-2 py-1 rounded text-xs'>
-                                  {perm}
-                                </code>
-                                {hasChildren && (
-                                  <Badge
-                                    variant='secondary'
-                                    className='mt-1 text-xs whitespace-nowrap'
-                                  >
-                                    Permission Group
-                                  </Badge>
-                                )}
+                              <div className='flex items-start text-sm prose dark:prose-invert'>
+                                <div className='flex flex-col items-center gap-2'>
+                                  <code className='px-2 py-1 rounded text-xs'>
+                                    {perm}
+                                  </code>
+                                  {hasChildren && (
+                                    <Badge
+                                      variant='secondary'
+                                      className='mt-1 text-xs whitespace-nowrap'
+                                    >
+                                      Permission Group
+                                    </Badge>
+                                  )}
+                                </div>
                               </div>
                               <div className='text-sm'>
                                 {obj.description || 'None'}
