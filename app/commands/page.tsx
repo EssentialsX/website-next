@@ -189,22 +189,11 @@ export default function Commands() {
                               <div className='prose dark:prose-invert'>
                                 {sortedAliases.length === 0 ?
                                   <span className='text-sm'>None</span>
-                                : openRow === cmd ?
-                                  <div className='flex flex-wrap gap-1'>
-                                    {sortedAliases.map(alias => (
-                                      <code
-                                        key={alias}
-                                        className='text-xs px-1 py-0.5 rounded'
-                                      >
-                                        {alias}
-                                      </code>
-                                    ))}
-                                  </div>
                                 : sortedAliases.length === 1 ?
                                   <code className='text-xs px-1 py-0.5 rounded'>
                                     {sortedAliases[0]}
                                   </code>
-                                : <div className='gap-1 flex items-center'>
+                                : <div className='gap-1'>
                                     <code className='text-xs px-1 py-0.5 rounded'>
                                       {sortedAliases[0]}
                                     </code>
@@ -263,7 +252,7 @@ export default function Commands() {
                               {openRow === cmd && (
                                 <motion.div className='flex flex-col w-full'>
                                   {sortedAliases.length > 1 && (
-                                    <div>
+                                    <div className='w-full'>
                                       <CommandAliases aliases={sortedAliases} />
                                     </div>
                                   )}
