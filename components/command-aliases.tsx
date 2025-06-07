@@ -60,7 +60,7 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.2, delay: 0.2 }}
-          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full'
+          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full max-w-none'
         >
           <h4 className='font-semibold mb-3 text-sm'>Command Aliases</h4>
           <div className='grid grid-cols-4 space-x-2 space-y-3'>
