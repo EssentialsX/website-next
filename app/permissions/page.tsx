@@ -2,6 +2,7 @@
 
 import PageHeader from '@/components/page-header';
 
+import PermissionSets from '@/components/permission-sets';
 import core from '@/lib/EssentialsX-permissions.json';
 import chat from '@/lib/EssentialsXChat-permissions.json';
 import discord from '@/lib/EssentialsXDiscord-permissions.json';
@@ -10,7 +11,7 @@ import spawn from '@/lib/EssentialsXSpawn-permissions.json';
 import xmpp from '@/lib/EssentialsXXMPP-permissions.json';
 import { Permission, PermissionData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
-import { IconChevronDown, IconSearch } from '@tabler/icons-react';
+import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
@@ -49,6 +50,22 @@ export default function Permissions() {
   const toggleRow = (perm: string) => {
     setOpenRow(prev => (prev === perm ? '' : perm));
   };
+
+  // Scroll to anchor once permissions are loaded
+  useEffect(() => {
+    if (!loading && typeof window !== 'undefined') {
+      const id = window.location.hash.slice(1);
+      if (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          const headerOffset = 80;
+          const y =
+            el.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    }
+  }, [loading]);
 
   const formatDefault = (value: 'op' | 'noop' | boolean) => {
     switch (value) {
@@ -151,14 +168,23 @@ export default function Permissions() {
                                   {mod}
                                 </Badge>
                               </div>
-                              <div className='flex items-center text-sm prose dark:prose-invert'>
-                                <code className='px-2 py-1 rounded text-xs'>
-                                  {perm}
-                                </code>
+                              <div className='prose dark:prose-invert'>
+                                <a
+                                  href={`#${perm}`}
+                                  className='flex items-center gap-1'
+                                >
+                                  <code className='px-2 py-1 rounded text-xs'>
+                                    {perm}
+                                  </code>
+                                  <IconHash
+                                    size={14}
+                                    className='text-muted-foreground'
+                                  />
+                                </a>
                                 {hasChildren && (
                                   <Badge
                                     variant='secondary'
-                                    className='ml-2 text-xs whitespace-nowrap'
+                                    className='mt-1 text-xs whitespace-nowrap'
                                   >
                                     Permission Group
                                   </Badge>
@@ -194,30 +220,9 @@ export default function Permissions() {
                             </div>
                             <AnimatePresence>
                               {hasChildren && openRow === rowKey && (
-                                <motion.div
-                                  className='flex flex-col'
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: 'auto', opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{
-                                    duration: 0.2,
-                                    ease: 'easeInOut',
-                                  }}
-                                >
-                                  {children.map(([child]) => (
-                                    <div
-                                      key={child}
-                                      className='grid grid-cols-4 gap-4 p-4 pl-8 border-t border-gray-200 dark:border-gray-700 text-sm'
-                                    >
-                                      <div></div>
-                                      <div className='flex items-center prose dark:prose-invert'>
-                                        <code className='px-2 py-1 rounded text-xs'>
-                                          {child}
-                                        </code>
-                                      </div>
-                                    </div>
-                                  ))}
-                                </motion.div>
+                                <PermissionSets
+                                  permissions={children.map(([child]) => child)}
+                                />
                               )}
                             </AnimatePresence>
                           </div>
