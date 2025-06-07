@@ -2,6 +2,7 @@
 
 import PageHeader from '@/components/page-header';
 
+import PermissionSets from '@/components/permission-sets';
 import core from '@/lib/EssentialsX-permissions.json';
 import chat from '@/lib/EssentialsXChat-permissions.json';
 import discord from '@/lib/EssentialsXDiscord-permissions.json';
@@ -194,30 +195,9 @@ export default function Permissions() {
                             </div>
                             <AnimatePresence>
                               {hasChildren && openRow === rowKey && (
-                                <motion.div
-                                  className='flex flex-col'
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: 'auto', opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{
-                                    duration: 0.2,
-                                    ease: 'easeInOut',
-                                  }}
-                                >
-                                  {children.map(([child]) => (
-                                    <div
-                                      key={child}
-                                      className='grid grid-cols-4 gap-4 p-4 pl-8 border-t border-gray-200 dark:border-gray-700 text-sm'
-                                    >
-                                      <div></div>
-                                      <div className='flex items-center prose dark:prose-invert'>
-                                        <code className='px-2 py-1 rounded text-xs'>
-                                          {child}
-                                        </code>
-                                      </div>
-                                    </div>
-                                  ))}
-                                </motion.div>
+                                <PermissionSets
+                                  permissions={children.map(([child]) => child)}
+                                />
                               )}
                             </AnimatePresence>
                           </div>
