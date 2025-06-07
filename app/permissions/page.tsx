@@ -11,7 +11,7 @@ import spawn from '@/lib/EssentialsXSpawn-permissions.json';
 import xmpp from '@/lib/EssentialsXXMPP-permissions.json';
 import { Permission, PermissionData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
-import { IconChevronDown, IconSearch } from '@tabler/icons-react';
+import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
@@ -50,6 +50,22 @@ export default function Permissions() {
   const toggleRow = (perm: string) => {
     setOpenRow(prev => (prev === perm ? '' : perm));
   };
+
+  // Scroll to anchor once permissions are loaded
+  useEffect(() => {
+    if (!loading && typeof window !== 'undefined') {
+      const id = window.location.hash.slice(1);
+      if (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          const headerOffset = 80;
+          const y =
+            el.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    }
+  }, [loading]);
 
   const formatDefault = (value: 'op' | 'noop' | boolean) => {
     switch (value) {
@@ -152,9 +168,18 @@ export default function Permissions() {
                                   {mod}
                                 </Badge>
                               </div>
-                              <div className='flex items-start text-sm prose dark:prose-invert'>
-                                <div className='flex flex-col items-center gap-2'>
+                                <a
+                                  href={`#${perm}`}
+                                  className='flex items-center gap-1'
+                                >
                                   <code className='px-2 py-1 rounded text-xs'>
+                                    {perm}
+                                  </code>
+                                  <IconHash
+                                    size={14}
+                                    className='text-muted-foreground'
+                                  />
+                                </a>
                                     {perm}
                                   </code>
                                   {hasChildren && (
