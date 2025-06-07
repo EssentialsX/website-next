@@ -1,5 +1,6 @@
 'use client';
 
+import CommandAliases from '@/components/command-aliases';
 import CommandUsages from '@/components/command-usages';
 import PageHeader from '@/components/page-header';
 
@@ -260,7 +261,13 @@ export default function Commands() {
 
                             <AnimatePresence>
                               {openRow === cmd && (
-                                <motion.div className='flex w-full'>
+                                <motion.div className='flex flex-col w-full'>
+                                  {sortedAliases.length > 1 && (
+                                    <div>
+                                      <CommandAliases aliases={sortedAliases} />
+                                    </div>
+                                  )}
+
                                   {obj.usages?.length > 0 && (
                                     <div className='w-full'>
                                       <CommandUsages usages={obj.usages} />
