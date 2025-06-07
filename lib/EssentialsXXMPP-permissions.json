@@ -1,0 +1,1 @@
+{"essentials.xmpp":{"default":"op","description":"Allows access to the /xmpp command","children":{}},"essentials.setxmpp":{"default":"op","description":"Allows access to the /setxmpp command","children":{}},"essentials.xmppspy":{"default":"op","description":"Allows access to the /xmppspy command","children":{}}}

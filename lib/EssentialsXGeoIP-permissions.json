@@ -1,0 +1,1 @@
+{"essentials.geoip.show":{"default":"op","description":"Shows the country or city of a user on login and /whois.","children":{}},"essentials.geoip.hide":{"default":"op","description":"Hides the bearer of this permission from users with essentials.geoip.show","children":{}}}
