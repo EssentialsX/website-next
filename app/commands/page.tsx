@@ -1,6 +1,5 @@
 'use client';
 
-import CommandAliases from '@/components/command-aliases';
 import CommandUsages from '@/components/command-usages';
 import PageHeader from '@/components/page-header';
 
@@ -189,11 +188,22 @@ export default function Commands() {
                               <div className='prose dark:prose-invert'>
                                 {sortedAliases.length === 0 ?
                                   <span className='text-sm'>None</span>
+                                : openRow === cmd ?
+                                  <div className='flex flex-wrap gap-1'>
+                                    {sortedAliases.map(alias => (
+                                      <code
+                                        key={alias}
+                                        className='text-xs px-1 py-0.5 rounded'
+                                      >
+                                        {alias}
+                                      </code>
+                                    ))}
+                                  </div>
                                 : sortedAliases.length === 1 ?
                                   <code className='text-xs px-1 py-0.5 rounded'>
                                     {sortedAliases[0]}
                                   </code>
-                                : <div className='gap-1'>
+                                : <div className='gap-1 flex items-center'>
                                     <code className='text-xs px-1 py-0.5 rounded'>
                                       {sortedAliases[0]}
                                     </code>
@@ -250,15 +260,9 @@ export default function Commands() {
 
                             <AnimatePresence>
                               {openRow === cmd && (
-                                <motion.div className='flex flex-row gap-0 justify-end items-center'>
-                                  {sortedAliases.length > 1 && (
-                                    <div>
-                                      <CommandAliases aliases={sortedAliases} />
-                                    </div>
-                                  )}
-
+                                <motion.div className='flex w-full'>
                                   {obj.usages?.length > 0 && (
-                                    <div>
+                                    <div className='w-full'>
                                       <CommandUsages usages={obj.usages} />
                                     </div>
                                   )}
