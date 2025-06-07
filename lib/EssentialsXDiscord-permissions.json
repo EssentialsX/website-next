@@ -1,1 +1,7 @@
-{"essentials.discord.markdown":{"default":"op","description":"Allows the bearer to bypass the Discord markdown filter","children":{}},"essentials.discord.ping":{"default":"op","description":"Allows the bearer to ping users in Discord","children":{}},"essentials.discord.receive.\u003cchannel\u003e":{"default":"op","description":"Allows the bearer to receive messages from the specified channel","children":{}},"essentials.discord":{"default":"op","description":"Allows access to the /discord command","children":{}},"essentials.discordbroadcast":{"default":"op","description":"Allows access to the /discordbroadcast command","children":{}},"essentials.discordbroadcast.markdown":{"default":"op","description":"Allows the bearer to bypass the Discord markdown filter for /discordbroadcast","children":{}},"essentials.discordbroadcast.ping":{"default":"op","description":"Allows the bearer to ping users in Discord for /discordbroadcast","children":{}},"essentials.discordbroadcast.\u003cchannel\u003e":{"default":"op","description":"Allows access to the /discordbroadcast command for the specified channel","children":{}}}
+{
+  "essentials.discord.link": {
+    "description": "Link Discord account.",
+    "default": true,
+    "children": {}
+  }
+}

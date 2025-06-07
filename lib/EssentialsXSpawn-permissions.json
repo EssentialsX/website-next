@@ -1,1 +1,7 @@
-{"essentials.spawn":{"default":"op","description":"Allows access to the /spawn command","children":{}},"essentials.spawn.others":{"default":"op","description":"Allows access to the /spawn command for other players","children":{}},"essentials.setspawn":{"default":"op","description":"Allows access to the /setspawn command","children":{}},"essentials.spawn-on-join.exempt":{"default":false,"description":"Bypass spawn teleportation on join when spawn-on-join is true","children":{}}}
+{
+  "essentials.spawn": {
+    "description": "Allows using spawn command.",
+    "default": true,
+    "children": {}
+  }
+}

@@ -1,1 +1,7 @@
-{"essentials.chat.color":{"default":"op","description":"Allows access to sending color codes in chat","children":{}},"essentials.chat.format":{"default":"op","description":"Allows access to sending format codes in chat","children":{}},"essentials.chat.magic":{"default":"op","description":"Allows access to sending magic codes in chat","children":{}},"essentials.chat.rgb":{"default":"op","description":"Allows access to sending RGB codes in chat","children":{}},"essentials.chat.url":{"default":"op","description":"Allows access to sending URLs in chat","children":{}},"essentials.toggleshout":{"default":"op","description":"Allows access to the /toggleshout command","children":{}},"essentials.toggleshout.others":{"default":"op","description":"Allows access to the /toggleshout command for other players","children":{}},"essentials.chat.question":{"default":"op","description":"Allows access to sending global questions in chat when chat radius is enabled","children":{}},"essentials.chat.shout":{"default":"op","description":"Allows access to sending shout messages","children":{}},"essentials.chat.local":{"default":true,"description":"Allows access to sending local chat messages","children":{}},"essentials.chat.receive.local":{"default":true,"description":"Allows access to receiving local chat messages","children":{}},"essentials.chat.receive.shout":{"default":true,"description":"Allows access to receiving shout chat messages","children":{}},"essentials.chat.receive.question":{"default":true,"description":"Allows access to receiving global question chat messages","children":{}}}
+{
+  "essentials.chat.color": {
+    "description": "Allows colored chat messages.",
+    "default": "noop",
+    "children": {}
+  }
+}
