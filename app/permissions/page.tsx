@@ -168,6 +168,7 @@ export default function Permissions() {
                                   {mod}
                                 </Badge>
                               </div>
+                              <div className='prose dark:prose-invert'>
                                 <a
                                   href={`#${perm}`}
                                   className='flex items-center gap-1'
@@ -180,17 +181,14 @@ export default function Permissions() {
                                     className='text-muted-foreground'
                                   />
                                 </a>
-                                    {perm}
-                                  </code>
-                                  {hasChildren && (
-                                    <Badge
-                                      variant='secondary'
-                                      className='mt-1 text-xs whitespace-nowrap'
-                                    >
-                                      Permission Group
-                                    </Badge>
-                                  )}
-                                </div>
+                                {hasChildren && (
+                                  <Badge
+                                    variant='secondary'
+                                    className='mt-1 text-xs whitespace-nowrap'
+                                  >
+                                    Permission Group
+                                  </Badge>
+                                )}
                               </div>
                               <div className='text-sm'>
                                 {obj.description || 'None'}
