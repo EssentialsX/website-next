@@ -1,12 +1,8 @@
-import Footer from '@/components/footer';
-import Header from '@/components/header';
+import CustomAppShell from '@/components/app-shell';
 import { SharedDataProvider } from '@/contexts/shared-data';
 import { theme } from '@/theme';
 import '@mantine/code-highlight/styles.css';
 import {
-  AppShell,
-  AppShellHeader,
-  AppShellMain,
   ColorSchemeScript,
   mantineHtmlProps,
   MantineProvider,
@@ -35,15 +31,7 @@ export default function RootLayout({
       <body>
         <SharedDataProvider>
           <MantineProvider theme={theme}>
-            <AppShell header={{ height: 80 }}>
-              <AppShellHeader withBorder={false}>
-                <Header />
-              </AppShellHeader>
-              <AppShellMain>
-                {children}
-                <Footer />
-              </AppShellMain>
-            </AppShell>
+            <CustomAppShell>{children}</CustomAppShell>
           </MantineProvider>
         </SharedDataProvider>
       </body>
