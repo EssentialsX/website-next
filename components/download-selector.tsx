@@ -110,9 +110,9 @@ export default function DownloadSelector() {
     document.body.removeChild(element);
   };
 
-  const selectAllModules = () => {
-    setSelectedModules(modules.map(module => module.id));
-  };
+  // const selectAllModules = () => {
+  //   setSelectedModules(modules.map(module => module.id));
+  // };
 
   const deselectAllModules = () => {
     setSelectedModules(['core']); // Keep core module selected
@@ -170,8 +170,13 @@ export default function DownloadSelector() {
         <Title order={2}>Core</Title>
 
         <div className='space-x-2'>
-          <Button onClick={selectAllModules}>Select All</Button>
-          <Button onClick={deselectAllModules}>Deselect All</Button>
+          {/*<Button onClick={selectAllModules}>Select All</Button>*/}
+          <Button
+            onClick={deselectAllModules}
+            disabled={selectedModules.length <= 1}
+          >
+            Deselect All
+          </Button>
           <Button
             onClick={downloadSelected}
             disabled={selectedModules.length <= 1 || isDownloading}
