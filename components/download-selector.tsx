@@ -14,11 +14,14 @@ import {
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
+const ZIP_SMITH_WORKER = 'TODO';
+
 export default function DownloadSelector() {
   const params = useSearchParams();
   const startBranch = params.get('branch') || 'dev';
   const [selectedModules, setSelectedModules] = useState<string[]>(['core']);
   const [buildType, setBuildType] = useState(startBranch);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const { stableBuild, devBuild } = useSharedData();
   if (!stableBuild || !devBuild) {
@@ -35,8 +38,61 @@ export default function DownloadSelector() {
   const stableChanges = 'https://github.com/EssentialsX/Essentials/releases';
   const devChanges = 'https://github.com/EssentialsX/Essentials/commits/2.x';
 
-  const downloadSelected = () => {
-    // todo figure out how to download multiple files with cors existing
+  const downloadSelected = async () => {
+    if (selectedModules.length <= 1) return;
+
+    setIsDownloading(true);
+
+    try {
+      const currentBuild = buildType === 'stable' ? stableBuild : devBuild;
+
+      const files = selectedModules.map(moduleId => {
+        const url = currentBuild.downloads[moduleId as ModuleType];
+        const filename = `${moduleNames[moduleId as ModuleType]}-${version}`;
+        return { url, filename };
+      });
+
+      const requestPayload = {
+        files,
+        zipFilename: `EssentialsX-${buildType}-${version}.zip`,
+      };
+
+      const response = await fetch(ZIP_SMITH_WORKER, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestPayload),
+      });
+
+      if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
+        throw new Error(
+          `Failed to create zip: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const zipBlob = await response.blob();
+
+      const downloadUrl = URL.createObjectURL(zipBlob);
+      const element = document.createElement('a');
+      element.setAttribute('href', downloadUrl);
+      element.setAttribute(
+        'download',
+        `EssentialsX-${buildType}-${version}.zip`,
+      );
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+
+      URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error('Error downloading selected files:', error);
+      alert('Failed to download selected files. Please try again.');
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   const downloadSingle = (module: ModuleType) => {
@@ -118,7 +174,8 @@ export default function DownloadSelector() {
           <Button onClick={deselectAllModules}>Deselect All</Button>
           <Button
             onClick={downloadSelected}
-            disabled={selectedModules.length <= 1}
+            disabled={selectedModules.length <= 1 || isDownloading}
+            loading={isDownloading}
           >
             Download Selected ({selectedModules.length})
           </Button>
