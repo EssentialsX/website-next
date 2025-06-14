@@ -7,14 +7,14 @@ import { useHeadroom } from '@mantine/hooks';
 import { PropsWithChildren } from 'react';
 
 export default function CustomAppShell({ children }: PropsWithChildren) {
-  const pinned = useHeadroom({ fixedAt: 80 });
+  const pinned = useHeadroom({ fixedAt: 160 });
 
   return (
-    <AppShell header={{ height: 80, collapsed: !pinned }}>
+    <AppShell header={{ height: 80, offset: false, collapsed: !pinned }}>
       <AppShellHeader withBorder={false}>
         <Header />
       </AppShellHeader>
-      <AppShellMain>
+      <AppShellMain pt={80}>
         {children}
         <Footer />
       </AppShellMain>
