@@ -65,8 +65,8 @@ export default function Footer() {
             aria-label='Toggle color scheme'
           >
             {colorScheme === 'dark' ?
-              <IconSun size='1.1rem' />
-            : <IconMoon size='1.1rem' />}
+              <IconSun suppressHydrationWarning size='1.1rem' />
+            : <IconMoon suppressHydrationWarning size='1.1rem' />}
           </ActionIcon>
         </Group>
       </Container>
