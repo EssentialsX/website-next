@@ -1,15 +1,10 @@
 'use client';
 
+import { fetchCommands } from '@/app/actions';
 import CommandAliases from '@/components/command-aliases';
 import CommandUsages from '@/components/command-usages';
 import PageHeader from '@/components/page-header';
 
-import core from '@/lib/EssentialsX-commands.json';
-import chat from '@/lib/EssentialsXChat-commands.json';
-import discord from '@/lib/EssentialsXDiscord-commands.json';
-import discordlink from '@/lib/EssentialsXDiscordLink-commands.json';
-import spawn from '@/lib/EssentialsXSpawn-commands.json';
-import xmpp from '@/lib/EssentialsXXMPP-commands.json';
 import { Command, CommandData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
 import {
@@ -42,16 +37,7 @@ export default function Commands() {
   useEffect(() => {
     const loadCommands = async () => {
       try {
-        const commandData = {
-          Essentials: core as CommandData,
-          Chat: chat as CommandData,
-          Spawn: spawn as CommandData,
-          Discord: discord as CommandData,
-          'Discord Link': discordlink as CommandData,
-          XMPP: xmpp as CommandData,
-        };
-
-        setAllCommands(commandData);
+        setAllCommands(await fetchCommands());
       } catch (error) {
         console.error('Failed to load commands:', error);
         setAllCommands({});

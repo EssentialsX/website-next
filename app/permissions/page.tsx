@@ -1,14 +1,9 @@
 'use client';
 
+import { fetchPermissions } from '@/app/actions';
 import PageHeader from '@/components/page-header';
 
 import PermissionSets from '@/components/permission-sets';
-import core from '@/lib/EssentialsX-permissions.json';
-import chat from '@/lib/EssentialsXChat-permissions.json';
-import discord from '@/lib/EssentialsXDiscord-permissions.json';
-import discordlink from '@/lib/EssentialsXDiscordLink-permissions.json';
-import spawn from '@/lib/EssentialsXSpawn-permissions.json';
-import xmpp from '@/lib/EssentialsXXMPP-permissions.json';
 import { Permission, PermissionData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
 import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
@@ -25,15 +20,7 @@ export default function Permissions() {
   useEffect(() => {
     const load = async () => {
       try {
-        const permData = {
-          Essentials: core as PermissionData,
-          Chat: chat as PermissionData,
-          Spawn: spawn as PermissionData,
-          Discord: discord as PermissionData,
-          'Discord Link': discordlink as PermissionData,
-          XMPP: xmpp as PermissionData,
-        };
-        setAllPermissions(permData);
+        setAllPermissions(await fetchPermissions());
       } catch (error) {
         console.error('Failed to load permissions:', error);
         setAllPermissions({});

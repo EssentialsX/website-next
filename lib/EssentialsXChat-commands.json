@@ -1,1 +1,0 @@
-{"toggleshout":{"aliases":["etoggleshout"],"description":"Toggles whether you are talking in shout mode","usage":"/\u003ccommand\u003e [player] [on|off]","usages":[{"usage":"/\u003ccommand\u003e [player]","description":"Toggles shout mode for yourself or another player if specified"}]}}
