@@ -6,6 +6,7 @@ import {
   Card,
   CardSection,
   Collapse,
+  ScrollArea,
   Table,
   TableTh,
   TableThead,
@@ -19,7 +20,8 @@ import {
   IconChevronUp,
   IconSearch,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useMemo, useRef, useState } from 'react';
 
 export default function DumpPluginsCard({
   title,
@@ -31,9 +33,99 @@ export default function DumpPluginsCard({
   const [sectionOpen, setSectionOpen] = useState(false);
   const [expandedPlugin, setExpandedPlugin] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const parentRef = useRef<HTMLDivElement>(null);
 
-  const filteredPlugins = plugins.filter(plugin =>
-    plugin.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredPlugins = useMemo(
+    () =>
+      plugins.filter(plugin =>
+        plugin.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+    [plugins, searchQuery],
+  );
+
+  const shouldVirtualize = filteredPlugins.length > 50;
+
+  const virtualizer = useVirtualizer({
+    count: filteredPlugins.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 60, // Approximate height of each plugin row
+    overscan: 5,
+  });
+
+  const renderPlugin = (plugin: DumpPlugin) => (
+    <div key={plugin.name}>
+      <div
+        style={{
+          padding: '12px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          borderBottom: '1px solid #e9ecef',
+          cursor: 'pointer',
+        }}
+        onClick={() =>
+          setExpandedPlugin(expandedPlugin === plugin.name ? null : plugin.name)
+        }
+      >
+        <ActionIcon
+          color='red'
+          variant='transparent'
+          style={{ marginRight: '8px' }}
+        >
+          {expandedPlugin === plugin.name ?
+            <IconChevronDown size={16} />
+          : <IconChevronRight size={16} />}
+        </ActionIcon>
+
+        <div style={{ display: 'flex', width: '100%' }}>
+          <Text style={{ flex: '40%' }}>{plugin.name}</Text>
+          <Text style={{ flex: '30%' }}>{plugin.version}</Text>
+          <div style={{ flex: '30%' }}>
+            <Badge
+              color={plugin.enabled ? 'green' : 'red'}
+              variant='filled'
+              style={{
+                textTransform: 'uppercase',
+                fontWeight: 'normal',
+                fontSize: '0.75rem',
+              }}
+            >
+              {plugin.enabled ? 'Enabled' : 'Disabled'}
+            </Badge>
+          </div>
+        </div>
+      </div>
+
+      <Collapse in={expandedPlugin === plugin.name}>
+        <Box p='md' style={{ borderBottom: '1px solid #e9ecef' }}>
+          {plugin.description !== undefined && (
+            <div style={{ marginBottom: '10px' }}>
+              <Text fw={700} component='span'>
+                Description:{' '}
+              </Text>
+              <Text component='span'>{plugin.description}</Text>
+            </div>
+          )}
+
+          {plugin.authors !== undefined && (
+            <div style={{ marginBottom: '10px' }}>
+              <Text fw={700} component='span'>
+                Authors:{' '}
+              </Text>
+              <Text component='span'>{plugin.authors.join(', ')}</Text>
+            </div>
+          )}
+
+          {plugin.main !== undefined && (
+            <div>
+              <Text fw={700} component='span'>
+                Main class:{' '}
+              </Text>
+              <Text component='span'>{plugin.main}</Text>
+            </div>
+          )}
+        </Box>
+      </Collapse>
+    </div>
   );
 
   return (
@@ -84,85 +176,32 @@ export default function DumpPluginsCard({
           />
         </Box>
 
-        <div>
-          {filteredPlugins.map(plugin => (
-            <div key={plugin.name}>
-              <div
-                style={{
-                  padding: '12px 16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  borderBottom: '1px solid #e9ecef',
-                  cursor: 'pointer',
-                }}
-                onClick={() =>
-                  setExpandedPlugin(
-                    expandedPlugin === plugin.name ? null : plugin.name,
-                  )
-                }
-              >
-                <ActionIcon
-                  color='red'
-                  variant='transparent'
-                  style={{ marginRight: '8px' }}
+        {shouldVirtualize ?
+          <ScrollArea ref={parentRef} h={400} scrollbarSize={8}>
+            <div
+              style={{
+                height: virtualizer.getTotalSize(),
+                width: '100%',
+                position: 'relative',
+              }}
+            >
+              {virtualizer.getVirtualItems().map(virtualItem => (
+                <div
+                  key={virtualItem.key}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    transform: `translateY(${virtualItem.start}px)`,
+                  }}
                 >
-                  {expandedPlugin === plugin.name ?
-                    <IconChevronDown size={16} />
-                  : <IconChevronRight size={16} />}
-                </ActionIcon>
-
-                <div style={{ display: 'flex', width: '100%' }}>
-                  <Text style={{ flex: '40%' }}>{plugin.name}</Text>
-                  <Text style={{ flex: '30%' }}>{plugin.version}</Text>
-                  <div style={{ flex: '30%' }}>
-                    <Badge
-                      color={plugin.enabled ? 'green' : 'red'}
-                      variant='filled'
-                      style={{
-                        textTransform: 'uppercase',
-                        fontWeight: 'normal',
-                        fontSize: '0.75rem',
-                      }}
-                    >
-                      {plugin.enabled ? 'Enabled' : 'Disabled'}
-                    </Badge>
-                  </div>
+                  {renderPlugin(filteredPlugins[virtualItem.index])}
                 </div>
-              </div>
-
-              <Collapse in={expandedPlugin === plugin.name}>
-                <Box p='md' style={{ borderBottom: '1px solid #e9ecef' }}>
-                  {plugin.description !== undefined && (
-                    <div style={{ marginBottom: '10px' }}>
-                      <Text fw={700} component='span'>
-                        Description:{' '}
-                      </Text>
-                      <Text component='span'>{plugin.description}</Text>
-                    </div>
-                  )}
-
-                  {plugin.authors !== undefined && (
-                    <div style={{ marginBottom: '10px' }}>
-                      <Text fw={700} component='span'>
-                        Authors:{' '}
-                      </Text>
-                      <Text component='span'>{plugin.authors.join(', ')}</Text>
-                    </div>
-                  )}
-
-                  {plugin.main !== undefined && (
-                    <div>
-                      <Text fw={700} component='span'>
-                        Main class:{' '}
-                      </Text>
-                      <Text component='span'>{plugin.main}</Text>
-                    </div>
-                  )}
-                </Box>
-              </Collapse>
+              ))}
             </div>
-          ))}
-        </div>
+          </ScrollArea>
+        : <div>{filteredPlugins.map(renderPlugin)}</div>}
       </Collapse>
     </Card>
   );

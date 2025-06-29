@@ -1,7 +1,15 @@
 import { CodeHighlight } from '@mantine/code-highlight';
-import { ActionIcon, Card, CardSection, Collapse, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Card,
+  CardSection,
+  Collapse,
+  ScrollArea,
+  Text,
+} from '@mantine/core';
 import { IconChevronUp } from '@tabler/icons-react';
 import { useState } from 'react';
+import { VirtualizedText } from './virtualized-text';
 
 interface DumpFileCardProps {
   title: string;
@@ -15,6 +23,12 @@ export default function DumpFileCard({
   language,
 }: DumpFileCardProps) {
   const [sectionOpen, setSectionOpen] = useState(false);
+
+  // Use virtualized text for large files that don't need syntax highlighting
+  const shouldVirtualize =
+    title === 'Latest Log' ||
+    title === 'Command Map' ||
+    title === 'Command Overrides';
 
   return (
     <Card padding={0} radius='sm' withBorder>
@@ -45,7 +59,12 @@ export default function DumpFileCard({
       </CardSection>
 
       <Collapse in={sectionOpen}>
-        <CodeHighlight code={content} language={language} />
+        {shouldVirtualize ?
+          <VirtualizedText content={content} maxHeight={400} />
+        : <ScrollArea h={400} scrollbarSize={8}>
+            <CodeHighlight code={content} language={language} />
+          </ScrollArea>
+        }
       </Collapse>
     </Card>
   );

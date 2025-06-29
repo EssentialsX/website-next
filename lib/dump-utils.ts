@@ -1,4 +1,8 @@
-export type GistFile = {
+export type GistResponse = {
+  files: Record<string, GistFile>;
+};
+
+type GistFile = {
   content: string;
   filename: string;
   type: string;
@@ -8,15 +12,11 @@ export type GistFile = {
   truncated: boolean;
 };
 
-export type GistResponse = {
-  files: Record<string, GistFile>;
-};
-
 export type DumpPaste = {
   files: DumpFile[];
 };
 
-export type DumpFile = {
+type DumpFile = {
   name: string;
   content: {
     format: string;
