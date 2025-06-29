@@ -23,12 +23,16 @@ export default function Home() {
       </section>
 
       <Container size='xl'>
-        <Stack gap={40} py={80}>
-          <div className='grid md:grid-cols-[300px_1fr] gap-16 items-center'>
+        <Stack gap={40} className='py-10 md:py-20'>
+          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
             <div className='flex justify-center'>
-              <IconTools size={180} className='text-gray-600' stroke={1} />
+              <IconTools
+                size={120}
+                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                stroke={1}
+              />
             </div>
-            <div>
+            <div className='text-center md:text-left'>
               <Title order={2} size='h2' mb='md'>
                 All you can eat, and then some.
               </Title>
@@ -56,17 +60,22 @@ export default function Home() {
                 variant='filled'
                 color='red'
                 size='md'
+                className='w-full md:w-auto'
               >
                 Visit the wiki
               </Button>
             </div>
           </div>
 
-          <div className='grid md:grid-cols-[300px_1fr] gap-16 items-center'>
+          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
             <div className='flex justify-center'>
-              <IconUsers size={180} className='text-gray-600' stroke={1} />
+              <IconUsers
+                size={120}
+                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                stroke={1}
+              />
             </div>
-            <div>
+            <div className='text-center md:text-left'>
               <Title order={2} size='h2' mb='md'>
                 Free, for everyone, forever.
               </Title>
@@ -111,17 +120,22 @@ export default function Home() {
                 variant='filled'
                 color='red'
                 size='md'
+                className='w-full md:w-auto'
               >
                 Join the community
               </Button>
             </div>
           </div>
 
-          <div className='grid md:grid-cols-[300px_1fr] gap-16 items-center'>
+          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
             <div className='flex justify-center'>
-              <IconCheck size={180} className='text-gray-600' stroke={1} />
+              <IconCheck
+                size={120}
+                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                stroke={1}
+              />
             </div>
-            <div>
+            <div className='text-center md:text-left'>
               <Title order={2} size='h2' mb='md'>
                 Compatible with just about <em>everything</em>.
               </Title>
@@ -145,6 +159,7 @@ export default function Home() {
                 variant='filled'
                 color='red'
                 size='md'
+                className='w-full md:w-auto'
               >
                 Get started with EssentialsX
               </Button>

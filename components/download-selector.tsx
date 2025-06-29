@@ -166,24 +166,30 @@ export default function DownloadSelector() {
         .
       </Text>
 
-      <div className='flex justify-between items-center mb-6 mt-4'>
-        <Title order={2}>Core</Title>
+      <div className='mb-6 mt-4'>
+        <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0'>
+          <Title order={2}>Core</Title>
 
-        <div className='space-x-2'>
-          {/*<Button onClick={selectAllModules}>Select All</Button>*/}
-          <Button
-            onClick={deselectAllModules}
-            disabled={selectedModules.length <= 1}
-          >
-            Deselect All
-          </Button>
-          <Button
-            onClick={downloadSelected}
-            disabled={selectedModules.length <= 1 || isDownloading}
-            loading={isDownloading}
-          >
-            Download Selected ({selectedModules.length})
-          </Button>
+          <div className='flex flex-col sm:flex-row gap-2 sm:space-x-2 sm:gap-0 w-full sm:w-auto'>
+            {/*<Button onClick={selectAllModules}>Select All</Button>*/}
+            <Button
+              onClick={deselectAllModules}
+              disabled={selectedModules.length <= 1}
+              fullWidth
+              className='sm:w-auto'
+            >
+              Deselect All
+            </Button>
+            <Button
+              onClick={downloadSelected}
+              disabled={selectedModules.length <= 1 || isDownloading}
+              loading={isDownloading}
+              fullWidth
+              className='sm:w-auto'
+            >
+              Download Selected ({selectedModules.length})
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -198,38 +204,74 @@ export default function DownloadSelector() {
       <Title order={2} mt='xl'>
         Recommended add-ons
       </Title>
-      <Group grow style={{ alignItems: 'stretch' }}>
-        {modules
-          .filter(m => m.recommended)
-          .map(module => (
-            <DownloadCard
-              key={module.id}
-              module={module}
-              download={() => downloadSingle(module.id as ModuleType)}
-              toggle={() => toggleModule(module.id)}
-              isSelecting={selectedModules.includes(module.id)}
-              version={version}
-            />
-          ))}
-      </Group>
+      <div className='block sm:hidden'>
+        <Stack>
+          {modules
+            .filter(m => m.recommended)
+            .map(module => (
+              <DownloadCard
+                key={module.id}
+                module={module}
+                download={() => downloadSingle(module.id as ModuleType)}
+                toggle={() => toggleModule(module.id)}
+                isSelecting={selectedModules.includes(module.id)}
+                version={version}
+              />
+            ))}
+        </Stack>
+      </div>
+      <div className='hidden sm:block'>
+        <Group grow style={{ alignItems: 'stretch' }}>
+          {modules
+            .filter(m => m.recommended)
+            .map(module => (
+              <DownloadCard
+                key={module.id}
+                module={module}
+                download={() => downloadSingle(module.id as ModuleType)}
+                toggle={() => toggleModule(module.id)}
+                isSelecting={selectedModules.includes(module.id)}
+                version={version}
+              />
+            ))}
+        </Group>
+      </div>
 
       <Title order={2} mt='xl'>
         Discord add-ons
       </Title>
-      <Group grow style={{ alignItems: 'stretch' }}>
-        {modules
-          .filter(m => m.id.includes('discord'))
-          .map(module => (
-            <DownloadCard
-              key={module.id}
-              module={module}
-              download={() => downloadSingle(module.id as ModuleType)}
-              toggle={() => toggleModule(module.id)}
-              isSelecting={selectedModules.includes(module.id)}
-              version={version}
-            />
-          ))}
-      </Group>
+      <div className='block sm:hidden'>
+        <Stack>
+          {modules
+            .filter(m => m.id.includes('discord'))
+            .map(module => (
+              <DownloadCard
+                key={module.id}
+                module={module}
+                download={() => downloadSingle(module.id as ModuleType)}
+                toggle={() => toggleModule(module.id)}
+                isSelecting={selectedModules.includes(module.id)}
+                version={version}
+              />
+            ))}
+        </Stack>
+      </div>
+      <div className='hidden sm:block'>
+        <Group grow style={{ alignItems: 'stretch' }}>
+          {modules
+            .filter(m => m.id.includes('discord'))
+            .map(module => (
+              <DownloadCard
+                key={module.id}
+                module={module}
+                download={() => downloadSingle(module.id as ModuleType)}
+                toggle={() => toggleModule(module.id)}
+                isSelecting={selectedModules.includes(module.id)}
+                version={version}
+              />
+            ))}
+        </Group>
+      </div>
 
       <Title order={2} mt='xl'>
         More add-ons

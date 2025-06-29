@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer className='mt-2'>
       <Container size='xl' py='md' px='xl'>
-        <Group mb='md' justify='center'>
+        <div className='flex flex-wrap justify-center gap-2 sm:gap-4 mb-4'>
           <StatBadge
             href='https://www.spigotmc.org/resources/essentialsx.9089'
             label='Downloads'
@@ -51,9 +51,9 @@ export default function Footer() {
             value={`${github.stars} stars`}
             valueColor='#000'
           />
-        </Group>
-        <Group justify='space-between' align='center'>
-          <Text size='sm' c='dimmed'>
+        </div>
+        <div className='flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:items-center'>
+          <Text size='sm' c='dimmed' className='text-center sm:text-left'>
             Website copyright © 2019-{year} EssentialsX Team, 2015-{year}{' '}
             EssentialsX wiki contributors except where otherwise noted.
           </Text>
@@ -63,12 +63,13 @@ export default function Footer() {
             variant='default'
             size='lg'
             aria-label='Toggle color scheme'
+            className='flex-shrink-0'
           >
             {colorScheme === 'dark' ?
               <IconSun suppressHydrationWarning size='1.1rem' />
             : <IconMoon suppressHydrationWarning size='1.1rem' />}
           </ActionIcon>
-        </Group>
+        </div>
       </Container>
     </footer>
   );
