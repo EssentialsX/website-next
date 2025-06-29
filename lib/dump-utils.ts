@@ -1,3 +1,17 @@
+export type GistFile = {
+  content: string;
+  filename: string;
+  type: string;
+  language: string | null;
+  raw_url: string;
+  size: number;
+  truncated: boolean;
+};
+
+export type GistResponse = {
+  files: Record<string, GistFile>;
+};
+
 export type DumpPaste = {
   files: DumpFile[];
 };

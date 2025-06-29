@@ -5,7 +5,15 @@ import { DumpData, DumpPaste } from '@/lib/dump-utils';
 import { Card, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
 
-export default function Dump({ id, dump }: { id: string; dump: DumpPaste }) {
+export default function Dump({
+  id,
+  dump,
+  sourceType = 'bytebin',
+}: {
+  id: string;
+  dump: DumpPaste;
+  sourceType?: 'bytebin' | 'gist';
+}) {
   const files = dump.files;
 
   const essRawData = files.find(f => f.name === 'dump.json')?.content?.value;
@@ -196,10 +204,17 @@ export default function Dump({ id, dump }: { id: string; dump: DumpPaste }) {
             : null}
             <b>{essData.meta.sender}</b> at{' '}
             {new Date(essData.meta.timestamp).toLocaleString()}.{' '}
-            <a className='underline' href={`https://pastes.dev/${id}`}>
+            <a
+              className='underline'
+              href={
+                sourceType === 'gist' ?
+                  `https://gist.github.com/${id}`
+                : `https://pastes.dev/${id}`
+              }
+            >
               Click here
             </a>{' '}
-            for the original paste.
+            for the original {sourceType === 'gist' ? 'gist' : 'paste'}.
           </Text>
         </Card>
       </Stack>
