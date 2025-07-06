@@ -21,6 +21,18 @@ const MODULES = [
 async function getData<T>(
   type: 'commands' | 'permissions',
 ): Promise<Record<string, T>> {
+  if (process.env.NODE_ENV === 'development') {
+    // In development, return local data from the data folder
+    const data = {} as Record<string, T>;
+    for (const mod of MODULES) {
+      const fileName = `EssentialsX${mod.replace(' ', '')}-${type}.json`;
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      data[mod.length ? mod : 'Essentials'] = require(`@/data/${fileName}`);
+    }
+
+    return data;
+  }
+
   const bucket = await getR2Bucket();
   if (!bucket) {
     throw new Error('R2 bucket not found');
