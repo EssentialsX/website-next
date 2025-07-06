@@ -28,8 +28,9 @@ export default function Downloads() {
 
             <Alert
               icon={<IconInfoCircle size='1.1rem' />}
+              style={{ borderLeft: '4px solid' }}
               title='Support Us'
-              color='yellow'
+              color='orange'
             >
               EssentialsX is developed by volunteers in our free time. If
               you&apos;d like to support the development of EssentialsX, please
