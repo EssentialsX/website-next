@@ -55,9 +55,13 @@ export default function DownloadSelector() {
         return { url, filename };
       });
 
+      const modulesList = selectedModules
+        .map(moduleId => moduleNames[moduleId as ModuleType])
+        .join('-');
+
       const requestPayload = {
         files,
-        zipFilename: `EssentialsX-${buildType}-${version}.zip`,
+        zipFilename: `EssentialsX-${buildType}-${version}-${modulesList}.zip`,
       };
 
       const response = await fetch(ZIP_SMITH_WORKER, {
@@ -82,7 +86,7 @@ export default function DownloadSelector() {
       element.setAttribute('href', downloadUrl);
       element.setAttribute(
         'download',
-        `EssentialsX-${buildType}-${version}.zip`,
+        `EssentialsX-${buildType}-${version}-${modulesList}.zip`,
       );
       element.style.display = 'none';
       document.body.appendChild(element);
