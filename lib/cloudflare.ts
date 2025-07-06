@@ -15,7 +15,7 @@ const MODULES = [
   'GeoIP',
   'Protect',
   'Spawn',
-  'XXMPP',
+  'XMPP',
 ];
 
 async function getData<T>(
