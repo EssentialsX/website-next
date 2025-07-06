@@ -1,4 +1,5 @@
 import { List, ListItem, Text } from '@mantine/core';
+import Link from 'next/link';
 
 export default function DownloadWarnings() {
   return (
@@ -18,9 +19,9 @@ export default function DownloadWarnings() {
           <Text>
             Do not use Mohist. Mohist tricks users into deleting official
             EssentialsX jars and installing unofficial modified software.{' '}
-            <a className='underline' href='#'>
+            <Link className='underline' href='/do-not-use-mohist'>
               Click here for more information.
-            </a>
+            </Link>
           </Text>
         </ListItem>
         <ListItem>
