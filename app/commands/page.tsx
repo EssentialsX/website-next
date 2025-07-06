@@ -179,18 +179,13 @@ export default function Commands() {
                                   <code className='rounded px-1 py-0.5 text-xs'>
                                     {sortedAliases[0]}
                                   </code>
-                                : <div className='gap-1'>
+                                : <div className='flex items-center gap-1'>
                                     <code className='rounded px-1 py-0.5 text-xs'>
                                       {sortedAliases[0]}
                                     </code>
-                                    <Button
-                                      variant='transparent'
-                                      size='sm'
-                                      px={4}
-                                      className='!cursor-default'
-                                    >
-                                      <IconChevronRight className='h-4 w-4' />
-                                    </Button>
+                                    <div className='flex items-center justify-center py-1'>
+                                      <IconChevronRight className='h-4 w-4 stroke-red-300' />
+                                    </div>
                                     {sortedAliases.length > 1 && (
                                       <span className='text-xs'>
                                         +{sortedAliases.length - 1} more
