@@ -36,6 +36,7 @@ async function getData<T>(
     }
   }
 
+  console.log('Loaded data for', type, ':', Object.keys(data).join(', '));
   return data;
 }
 
