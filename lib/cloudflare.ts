@@ -26,8 +26,12 @@ async function getData<T>(
     const data = {} as Record<string, T>;
     for (const mod of MODULES) {
       const fileName = `EssentialsX${mod.replace(' ', '')}-${type}.json`;
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      data[mod.length ? mod : 'Essentials'] = require(`@/data/${fileName}`);
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        data[mod.length ? mod : 'Essentials'] = require(`../data/${fileName}`);
+      } catch {
+        // Skip modules that don't have data files
+      }
     }
 
     return data;
