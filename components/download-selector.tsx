@@ -39,7 +39,10 @@ export default function DownloadSelector() {
   const devChanges = 'https://github.com/EssentialsX/Essentials/commits/2.x';
 
   const downloadSelected = async () => {
-    if (selectedModules.length <= 1) return;
+    if (selectedModules.length <= 1) {
+      downloadSingle('core');
+      return;
+    }
 
     setIsDownloading(true);
 
@@ -182,7 +185,7 @@ export default function DownloadSelector() {
             </Button>
             <Button
               onClick={downloadSelected}
-              disabled={selectedModules.length <= 1 || isDownloading}
+              disabled={isDownloading}
               loading={isDownloading}
               fullWidth
               className='sm:w-auto'
