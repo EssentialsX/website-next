@@ -11,5 +11,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - name: Set Cloudflare API Token
         run: echo "CLOUDFLARE_API_TOKEN=${{ secrets.CF_API_TOKEN }}" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: bun i
       - name: Deploy
         run: bun run deploy
