@@ -9,12 +9,18 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { downloads, discord, github, stableBuild, devBuild } = useSharedData();
+  const [mounted, setMounted] = useState(false);
 
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <footer className='mt-2'>
@@ -57,16 +63,15 @@ export default function Footer() {
             EssentialsX wiki contributors except where otherwise noted.
           </Text>
           <ActionIcon
-            suppressHydrationWarning
             onClick={() => toggleColorScheme()}
             variant='default'
             size='lg'
             aria-label='Toggle color scheme'
             className='flex-shrink-0'
           >
-            {colorScheme === 'dark' ?
-              <IconSun suppressHydrationWarning size='1.1rem' />
-            : <IconMoon suppressHydrationWarning size='1.1rem' />}
+            {mounted && colorScheme === 'dark' ?
+              <IconSun size='1.1rem' />
+            : <IconMoon size='1.1rem' />}
           </ActionIcon>
         </div>
       </Container>
