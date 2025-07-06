@@ -31,7 +31,8 @@
     "react-dom": "19.1.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "shiki": "^3.6.0"
+    "shiki": "^3.6.0",
+    "tailwind-preset-mantine": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

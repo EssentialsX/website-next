@@ -15,6 +15,19 @@ export const theme = createTheme({
       '#b41220',
       '#9e0419',
     ],
+
+    orange: [
+      '#ffebe7',
+      '#ffd5cf',
+      '#fdaa9e',
+      '#f96854',
+      '#f7543d',
+      '#f63b21',
+      '#f72d12',
+      '#dc1f06',
+      '#c51803',
+      '#ac0b00',
+    ],
     dark: [
       '#C1C2C5',
       '#A6A7AB',

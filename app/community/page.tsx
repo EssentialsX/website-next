@@ -71,7 +71,7 @@ export default function Community() {
           </div>
 
           <div className='space-y-8'>
-            <div className='rounded-lg bg-blue-600 p-6 text-center text-white'>
+            <div className='rounded-lg bg-[#7289DA] p-6 text-center text-white'>
               <h3 className='mb-2 font-bold'>
                 EssentialsX is part of MOSS on Discord
               </h3>
@@ -92,7 +92,7 @@ export default function Community() {
               </Button>
             </div>
 
-            <div className='rounded-lg bg-red-400 p-6 text-center text-white'>
+            <div className='rounded-lg bg-orange-300 p-6 text-center text-white'>
               <h3 className='mb-2 font-bold'>Support EssentialsX on Patreon</h3>
               <div className='mb-2 flex justify-between'>
                 <div>
