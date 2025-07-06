@@ -13,7 +13,7 @@ export default function WikiSidebar() {
       <div>
         {Object.keys(wikiNavigation).map((category, index) => (
           <div key={index} className='mb-6'>
-            <Text size='sm' fw={700} c='dimmed' className='mb-2'>
+            <Text size='sm' fw={700} c='dimmed' mb={4}>
               {category}
             </Text>
             <div className='space-y-1'>
