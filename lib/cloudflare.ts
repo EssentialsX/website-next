@@ -29,14 +29,13 @@ async function getData<T>(
   const data = {} as Record<string, T>;
 
   for (const mod of MODULES) {
-    const fileName = `EssentialX${mod.replace(' ', '')}-${type}.json`;
+    const fileName = `EssentialsX${mod.replace(' ', '')}-${type}.json`;
     const file = await bucket.get(fileName);
     if (file) {
       data[mod.length ? mod : 'Essentials'] = await file.json();
     }
   }
 
-  console.log('Loaded data for', type, ':', Object.keys(data).join(', '));
   return data;
 }
 
