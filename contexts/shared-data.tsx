@@ -5,6 +5,7 @@ import {
   getModuleIdFromArtifact,
   getVersionFromArtifact,
 } from '@/lib/build-utils';
+import { getDiscordMemberCount } from '@/lib/discord';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 
@@ -92,15 +93,7 @@ export const SharedDataProvider = ({
   };
 
   const fetchDiscordData = async () => {
-    let members = 1000;
-    try {
-      const response = await axios.get(
-        'https://canary.discordapp.com/api/guilds/390942438061113344/widget.json',
-      );
-      members = response.data.presence_count;
-    } catch (e) {
-      console.error(e);
-    }
+    const members = await getDiscordMemberCount();
 
     setDiscordData({ members });
   };
