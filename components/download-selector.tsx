@@ -14,7 +14,7 @@ import {
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
-const ZIP_SMITH_WORKER = 'TODO';
+const ZIP_SMITH_WORKER = 'https://zip-smith.essentialsx.workers.dev';
 
 export default function DownloadSelector() {
   const params = useSearchParams();
