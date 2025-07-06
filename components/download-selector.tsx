@@ -170,7 +170,7 @@ export default function DownloadSelector() {
         <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0'>
           <Title order={2}>Core</Title>
 
-          <div className='flex flex-col sm:flex-row gap-2 sm:space-x-2 sm:gap-0 w-full sm:w-auto'>
+          <div className='flex flex-col sm:flex-row gap-2 sm:space-x-2 sm:gap-0 w-full sm:w-[500px]'>
             {/*<Button onClick={selectAllModules}>Select All</Button>*/}
             <Button
               onClick={deselectAllModules}
