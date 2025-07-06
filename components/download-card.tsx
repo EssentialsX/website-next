@@ -25,11 +25,11 @@ export default function DownloadCard({
         <div className='flex flex-wrap items-center gap-2'>
           <Group gap='sm'>
             <Checkbox
-              me={-8}
+              me={-4}
+              c='red'
               checked={isSelecting}
               disabled={toggle === undefined}
               onChange={() => toggle!()}
-              c='red'
               className={`transition-transform duration-300 ease-in-out ${isSelecting ? 'scale-110 rotate-6 shadow-lg' : ''} `}
             />
             <h2
