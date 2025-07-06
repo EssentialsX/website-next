@@ -2,7 +2,7 @@ import { List, ListItem, Text } from '@mantine/core';
 
 export default function DownloadInfo() {
   return (
-    <div className='md:w-72 not-dark:bg-blue-50 border-blue-500 p-4 border-l-4'>
+    <div className='border-l-4 border-blue-500 p-4 not-dark:bg-blue-50 md:w-72'>
       <Text>
         EssentialsX officially supports the Spigot and <b>Paper</b>{' '}
         (recommended) server software running the following Minecraft versions:

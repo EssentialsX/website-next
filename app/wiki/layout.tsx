@@ -10,7 +10,7 @@ export default function WikiLayout({
   return (
     <div className='mt-8'>
       <Container size='lg'>
-        <div className='flex flex-col md:flex-row gap-8'>
+        <div className='flex flex-col gap-8 md:flex-row'>
           <div className='md:w-1/4'>
             <WikiSidebar />
           </div>

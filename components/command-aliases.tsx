@@ -46,7 +46,7 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
           },
         },
       }}
-      className='overflow-hidden mb-10'
+      className='mb-10 overflow-hidden'
       style={{ transformOrigin: 'top' }}
     >
       <motion.div
@@ -60,9 +60,9 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.2, delay: 0.2 }}
-          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full max-w-none'
+          className='prose dark:prose-invert w-full max-w-none rounded-lg bg-gray-100 p-4 dark:bg-[#1c1e22]'
         >
-          <h4 className='font-semibold mb-3 text-sm'>Command Aliases</h4>
+          <h4 className='mb-3 text-sm font-semibold'>Command Aliases</h4>
           <div className='flex flex-wrap gap-2'>
             {aliases.map((alias, usageIndex) => (
               <motion.div
@@ -74,7 +74,7 @@ export default function CommandAliases({ aliases }: { aliases: string[] }) {
                   delay: 0.2 + usageIndex * 0.1,
                 }}
               >
-                <code className='text-xs bg-background px-1 py-0.5 rounded transition-colors duration-200'>
+                <code className='bg-background rounded px-1 py-0.5 text-xs transition-colors duration-200'>
                   /{alias}
                 </code>
               </motion.div>

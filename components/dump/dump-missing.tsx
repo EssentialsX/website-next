@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function DumpMissing() {
   return (
-    <div className='mt-8 mx-20 rounded-xl'>
-      <div className='not-dark:bg-red-50 border-red-500 p-4 border-l-4 rounded-sm'>
+    <div className='mx-20 mt-8 rounded-xl'>
+      <div className='rounded-sm border-l-4 border-red-500 p-4 not-dark:bg-red-50'>
         <Text>
           Run the <b>/ess dump</b> in-game or from the console to generate a
           server dump. You can then click on the provided link to view the dump,

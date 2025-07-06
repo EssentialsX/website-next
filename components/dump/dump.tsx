@@ -197,7 +197,7 @@ export default function Dump({
                   height={16}
                   unoptimized
                   alt='Player Head'
-                  className='mb-1 me-1 inline'
+                  className='me-1 mb-1 inline'
                   src={`https://crafthead.net/helm/${essData.meta.senderUuid}/16`}
                 />
               </span>

@@ -15,7 +15,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 
 const loadingBars = (
-  <div className='flex justify-center mt-12'>
+  <div className='mt-12 flex justify-center'>
     <Loader type='bars' />
   </div>
 );

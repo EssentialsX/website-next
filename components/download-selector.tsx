@@ -26,7 +26,7 @@ export default function DownloadSelector() {
   const { stableBuild, devBuild } = useSharedData();
   if (!stableBuild || !devBuild) {
     return (
-      <div className='flex justify-center mt-12'>
+      <div className='mt-12 flex justify-center'>
         <Loader type='bars' />
       </div>
     );
@@ -181,11 +181,11 @@ export default function DownloadSelector() {
         .
       </Text>
 
-      <div className='mb-6 mt-4'>
-        <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0'>
+      <div className='mt-4 mb-6'>
+        <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0'>
           <Title order={2}>Core</Title>
 
-          <div className='flex flex-col sm:flex-row gap-2 sm:space-x-2 sm:gap-0 w-full sm:w-[500px]'>
+          <div className='flex w-full flex-col gap-2 sm:w-[500px] sm:flex-row sm:gap-0 sm:space-x-2'>
             {/*<Button onClick={selectAllModules}>Select All</Button>*/}
             <Button
               onClick={deselectAllModules}

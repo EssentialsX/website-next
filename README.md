@@ -1,13 +1,15 @@
 # EssentialsX Website
-This repository contains the source code for the EssentialsX website, which 
+
+This repository contains the source code for the EssentialsX website, which
 is hosted at [essentialsx.net](https://essentialsx.net).
 
-This website is built using [Next.js](https://nextjs.org/), 
-[Mantine](https://mantine.dev/), [Tailwind CSS](https://tailwindcss.com/), 
+This website is built using [Next.js](https://nextjs.org/),
+[Mantine](https://mantine.dev/), [Tailwind CSS](https://tailwindcss.com/),
 and [MDX](https://mdxjs.com/).
 
 ## Development
-While possible to use any package manager, this project is set up to use 
+
+While possible to use any package manager, this project is set up to use
 [bun](https://bun.sh/), a modern, superfast package manager and JavaScript runtime.
 
 To get started, [install bun](https://bun.sh/docs/installation), clone this

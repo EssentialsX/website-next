@@ -71,14 +71,14 @@ export default function Permissions() {
 
   if (loading) {
     return (
-      <div className='flex flex-col min-h-screen'>
+      <div className='flex min-h-screen flex-col'>
         <PageHeader
           title='Permissions'
           description='EssentialsX permissions reference.'
         />
-        <div className='flex-1 container mx-auto px-4 py-8 flex items-center justify-center'>
+        <div className='container mx-auto flex flex-1 items-center justify-center px-4 py-8'>
           <div className='text-center'>
-            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4'></div>
+            <div className='border-primary mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2'></div>
             <p>Loading permissions...</p>
           </div>
         </div>
@@ -92,15 +92,15 @@ export default function Permissions() {
   );
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex min-h-screen flex-col'>
       <PageHeader
         title='Permissions'
         description={`EssentialsX permissions reference for ${permsCount} permissions.`}
       />
-      <div className='flex-1 container mx-auto px-4 py-8'>
-        <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
+      <div className='container mx-auto flex-1 px-4 py-8'>
+        <div className='bg-background overflow-hidden rounded-lg border shadow-sm'>
           <div className='w-full'>
-            <div className='flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
+            <div className='flex flex-col gap-4 border-b border-gray-300 p-4 sm:flex-row dark:border-gray-700'>
               <TextInput
                 placeholder='Search permissions'
                 leftSection={<IconSearch size={16} />}
@@ -119,7 +119,7 @@ export default function Permissions() {
               />
             </div>
             {/* Desktop table header - hidden on mobile */}
-            <div className='hidden lg:grid grid-cols-4 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
+            <div className='hidden grid-cols-4 gap-4 border-b border-gray-300 p-4 text-sm font-semibold lg:grid dark:border-gray-700'>
               <div>Module</div>
               <div>Permission</div>
               <div>Description</div>
@@ -152,7 +152,7 @@ export default function Permissions() {
                             style={{ scrollMarginTop: '80px' }}
                           >
                             {/* Desktop table row - hidden on mobile */}
-                            <div className='hidden lg:grid grid-cols-4 gap-4 p-4 items-center'>
+                            <div className='hidden grid-cols-4 items-center gap-4 p-4 lg:grid'>
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
@@ -163,7 +163,7 @@ export default function Permissions() {
                                   href={`#${perm}`}
                                   className='flex items-center gap-1'
                                 >
-                                  <code className='px-2 py-1 rounded text-xs'>
+                                  <code className='rounded px-2 py-1 text-xs'>
                                     {perm}
                                   </code>
                                   <IconHash size={14} />
@@ -207,7 +207,7 @@ export default function Permissions() {
                             </div>
 
                             {/* Mobile card layout - hidden on desktop */}
-                            <div className='lg:hidden p-4 space-y-3'>
+                            <div className='space-y-3 p-4 lg:hidden'>
                               <div className='flex items-center justify-between'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
@@ -222,7 +222,7 @@ export default function Permissions() {
                                   href={`#${perm}`}
                                   className='flex items-center gap-1'
                                 >
-                                  <code className='px-2 py-1 rounded text-sm font-mono'>
+                                  <code className='rounded px-2 py-1 font-mono text-sm'>
                                     {perm}
                                   </code>
                                   <IconHash size={14} />

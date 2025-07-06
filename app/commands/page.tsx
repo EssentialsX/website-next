@@ -75,14 +75,14 @@ export default function Commands() {
 
   if (loading) {
     return (
-      <div className='flex flex-col min-h-screen'>
+      <div className='flex min-h-screen flex-col'>
         <PageHeader
           title='Commands'
           description='EssentialsX commands reference.'
         />
-        <div className='flex-1 container mx-auto px-4 py-8 flex items-center justify-center'>
+        <div className='container mx-auto flex flex-1 items-center justify-center px-4 py-8'>
           <div className='text-center'>
-            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4'></div>
+            <div className='border-primary mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2'></div>
             <p>Loading commands...</p>
           </div>
         </div>
@@ -96,15 +96,15 @@ export default function Commands() {
   );
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex min-h-screen flex-col'>
       <PageHeader
         title='Commands'
         description={`EssentialsX commands reference for ${commandsCount} commands.`}
       />
-      <div className='flex-1 container mx-auto px-4 py-8'>
-        <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
+      <div className='container mx-auto flex-1 px-4 py-8'>
+        <div className='bg-background overflow-hidden rounded-lg border shadow-sm'>
           <div className='w-full'>
-            <div className='flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
+            <div className='flex flex-col gap-4 border-b border-gray-300 p-4 sm:flex-row dark:border-gray-700'>
               <TextInput
                 placeholder='Search commands'
                 leftSection={<IconSearch size={16} />}
@@ -123,7 +123,7 @@ export default function Commands() {
               />
             </div>
             {/* Desktop table header - hidden on mobile */}
-            <div className='hidden lg:grid grid-cols-5 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
+            <div className='hidden grid-cols-5 gap-4 border-b border-gray-300 p-4 text-sm font-semibold lg:grid dark:border-gray-700'>
               <div>Module</div>
               <div>Command</div>
               <div>Aliases</div>
@@ -153,19 +153,19 @@ export default function Commands() {
                             style={{ scrollMarginTop: '80px' }}
                           >
                             {/* Desktop table row - hidden on mobile */}
-                            <div className='hidden lg:grid grid-cols-5 gap-4 p-4 items-center'>
+                            <div className='hidden grid-cols-5 items-center gap-4 p-4 lg:grid'>
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
                                 </Badge>
                               </div>
 
-                              <div className='flex items-center text-sm prose dark:prose-invert'>
+                              <div className='prose dark:prose-invert flex items-center text-sm'>
                                 <a
                                   href={`#${cmd}`}
                                   className='flex items-center gap-1'
                                 >
-                                  <code className='px-2 py-1 rounded text-xs'>
+                                  <code className='rounded px-2 py-1 text-xs'>
                                     /{cmd}
                                   </code>
                                   <IconHash size={14} />
@@ -176,11 +176,11 @@ export default function Commands() {
                                 {sortedAliases.length === 0 ?
                                   <span className='text-sm'>None</span>
                                 : sortedAliases.length === 1 ?
-                                  <code className='text-xs px-1 py-0.5 rounded'>
+                                  <code className='rounded px-1 py-0.5 text-xs'>
                                     {sortedAliases[0]}
                                   </code>
                                 : <div className='gap-1'>
-                                    <code className='text-xs px-1 py-0.5 rounded'>
+                                    <code className='rounded px-1 py-0.5 text-xs'>
                                       {sortedAliases[0]}
                                     </code>
                                     <Button
@@ -200,12 +200,12 @@ export default function Commands() {
                                 }
                               </div>
 
-                              <div className='text-sm flex items-center'>
+                              <div className='flex items-center text-sm'>
                                 {obj.description || 'None'}
                               </div>
 
-                              <div className='flex items-center gap-2 prose dark:prose-invert'>
-                                <code className='px-2 py-1 rounded text-xs flex-1 truncate'>
+                              <div className='prose dark:prose-invert flex items-center gap-2'>
+                                <code className='flex-1 truncate rounded px-2 py-1 text-xs'>
                                   /{cmd}
                                   {obj.usage ? obj.usage.slice(10) : ''}
                                 </code>
@@ -235,7 +235,7 @@ export default function Commands() {
                             </div>
 
                             {/* Mobile card layout - hidden on desktop */}
-                            <div className='lg:hidden p-4 space-y-3'>
+                            <div className='space-y-3 p-4 lg:hidden'>
                               <div className='flex items-center justify-between'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
@@ -273,7 +273,7 @@ export default function Commands() {
                                   href={`#${cmd}`}
                                   className='flex items-center gap-1'
                                 >
-                                  <code className='px-2 py-1 rounded text-sm font-mono'>
+                                  <code className='rounded px-2 py-1 font-mono text-sm'>
                                     /{cmd}
                                   </code>
                                   <IconHash size={14} />
@@ -293,7 +293,7 @@ export default function Commands() {
                                     {sortedAliases.slice(0, 3).map(alias => (
                                       <code
                                         key={alias}
-                                        className='text-xs px-1 py-0.5 rounded'
+                                        className='rounded px-1 py-0.5 text-xs'
                                       >
                                         {alias}
                                       </code>
@@ -311,7 +311,7 @@ export default function Commands() {
                                 <div className='text-xs font-medium text-gray-500 dark:text-gray-400'>
                                   Usage:
                                 </div>
-                                <code className='px-2 py-1 rounded text-xs block bg-gray-100 dark:bg-gray-800 overflow-x-auto'>
+                                <code className='block overflow-x-auto rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800'>
                                   /{cmd}
                                   {obj.usage ? obj.usage.slice(10) : ''}
                                 </code>
@@ -320,7 +320,7 @@ export default function Commands() {
 
                             <AnimatePresence>
                               {openRow === cmd && (
-                                <motion.div className='flex flex-col w-full'>
+                                <motion.div className='flex w-full flex-col'>
                                   {sortedAliases.length > 1 && (
                                     <div className='w-full'>
                                       <CommandAliases aliases={sortedAliases} />

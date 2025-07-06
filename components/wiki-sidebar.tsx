@@ -9,7 +9,7 @@ export default function WikiSidebar() {
   const path = usePathname();
 
   return (
-    <aside className='bg-[#1c1e22] w-full p-4 rounded-lg'>
+    <aside className='w-full rounded-lg bg-[#1c1e22] p-4'>
       <div>
         {Object.keys(wikiNavigation).map((category, index) => (
           <div key={index} className='mb-6'>
@@ -21,7 +21,7 @@ export default function WikiSidebar() {
                 <Link
                   key={linkIndex}
                   href={link.slug ? `/wiki/${link.slug}` : link.href!}
-                  className={`block py-1 px-2 rounded hover:bg-[#d91c1c] ${
+                  className={`block rounded px-2 py-1 hover:bg-[#d91c1c] ${
                     path === `/wiki/${link.slug}` ?
                       'bg-[#d91c1c] text-white'
                     : 'text-gray-300'

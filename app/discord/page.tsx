@@ -12,7 +12,7 @@ export default function Discord() {
         description='Enter the client ID from the Discord Developers site into the box below to add your bot to your Discord server.'
       />
 
-      <div className='max-w-6xl mx-auto px-4 py-8'>
+      <div className='mx-auto max-w-6xl px-4 py-8'>
         <Stack>
           <Title order={2}>
             Authorize your EssentialsX Discord Bot with Discord
@@ -30,7 +30,7 @@ export default function Discord() {
             the next step in the initial setup.
           </p>
 
-          <div className='flex items-center justify-center mt-10'>
+          <div className='mt-10 flex items-center justify-center'>
             <DiscordAuthorize />
           </div>
         </Stack>

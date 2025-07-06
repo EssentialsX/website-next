@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer className='mt-2'>
       <Container size='xl' py='md' px='xl'>
-        <div className='flex flex-wrap justify-center gap-2 sm:gap-4 mb-4'>
+        <div className='mb-4 flex flex-wrap justify-center gap-2 sm:gap-4'>
           <StatBadge
             href='https://www.spigotmc.org/resources/essentialsx.9089'
             label='Downloads'
@@ -51,7 +51,7 @@ export default function Footer() {
             valueColor='#000'
           />
         </div>
-        <div className='flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:items-center'>
+        <div className='flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between'>
           <Text size='sm' c='dimmed' className='text-center sm:text-left'>
             Website copyright © 2019-{year} EssentialsX Team, 2015-{year}{' '}
             EssentialsX wiki contributors except where otherwise noted.

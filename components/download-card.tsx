@@ -19,26 +19,10 @@ export default function DownloadCard({
 }: CardProps) {
   return (
     <div
-      className={`
-                w-full 
-                shadow-lg 
-                rounded-lg 
-                p-4 sm:p-4 
-                flex 
-                flex-col sm:flex-row
-                sm:items-center 
-                gap-4 sm:gap-0
-                sm:justify-between 
-                transition-all 
-                duration-300 
-                ease-in-out
-                dark:bg-black
-                not-dark:bg-white
-                ${isSelecting ? 'scale-[1.02]' : ''}
-            `}
+      className={`flex w-full flex-col gap-4 rounded-lg p-4 shadow-lg transition-all duration-300 ease-in-out not-dark:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:p-4 dark:bg-black ${isSelecting ? 'scale-[1.02]' : ''} `}
     >
-      <div className='flex flex-col flex-1'>
-        <div className='flex items-center gap-2 flex-wrap'>
+      <div className='flex flex-1 flex-col'>
+        <div className='flex flex-wrap items-center gap-2'>
           <Group gap='sm'>
             <Checkbox
               me={-8}
@@ -46,26 +30,10 @@ export default function DownloadCard({
               disabled={toggle === undefined}
               onChange={() => toggle!()}
               c='red'
-              className={`
-                                transition-transform 
-                                duration-300 
-                                ease-in-out
-                                ${
-                                  isSelecting ?
-                                    'scale-110 rotate-6 shadow-lg'
-                                  : ''
-                                }
-                            `}
+              className={`transition-transform duration-300 ease-in-out ${isSelecting ? 'scale-110 rotate-6 shadow-lg' : ''} `}
             />
             <h2
-              className={`
-                            text-lg 
-                            font-semibold 
-                            transition-colors 
-                            duration-300 
-                            ease-in-out
-                            ${isSelecting ? 'dark:text-blue-400 not-dark:text-blue-800' : ''}
-                        `}
+              className={`text-lg font-semibold transition-colors duration-300 ease-in-out ${isSelecting ? 'not-dark:text-blue-800 dark:text-blue-400' : ''} `}
             >
               {module.name}
             </h2>
@@ -75,12 +43,7 @@ export default function DownloadCard({
               color='gray'
               variant='light'
               size='xs'
-              className={`
-                                    transition-all 
-                                    duration-300 
-                                    ease-in-out
-                                    ${isSelecting ? 'scale-110' : ''}
-                                `}
+              className={`transition-all duration-300 ease-in-out ${isSelecting ? 'scale-110' : ''} `}
             >
               BETA
             </Badge>
@@ -90,12 +53,7 @@ export default function DownloadCard({
               color='red'
               variant='light'
               size='xs'
-              className={`
-                                    transition-all 
-                                    duration-300 
-                                    ease-in-out
-                                    ${isSelecting ? 'scale-110' : ''}
-                                `}
+              className={`transition-all duration-300 ease-in-out ${isSelecting ? 'scale-110' : ''} `}
             >
               REQUIRED
             </Badge>
@@ -103,19 +61,14 @@ export default function DownloadCard({
               color='gray'
               variant='light'
               size='xs'
-              className={`
-                                    transition-all 
-                                    duration-300 
-                                    ease-in-out
-                                    ${isSelecting ? 'scale-110' : ''}
-                                `}
+              className={`transition-all duration-300 ease-in-out ${isSelecting ? 'scale-110' : ''} `}
             >
               OPTIONAL
             </Badge>
           }
         </div>
         {module.discord === true && (
-          <div className='flex items-center gap-2 mt-2'>
+          <div className='mt-2 flex items-center gap-2'>
             <Badge
               color='blue'
               variant='light'
@@ -127,27 +80,12 @@ export default function DownloadCard({
           </div>
         )}
         <p
-          className={`
-                    text-sm 
-                    not-dark:text-gray-600 
-                    mt-3 
-                    leading-relaxed
-                    transition-colors 
-                    duration-300 
-                    ease-in-out
-                `}
+          className={`mt-3 text-sm leading-relaxed transition-colors duration-300 ease-in-out not-dark:text-gray-600`}
         >
           {module.description}
         </p>
         <p
-          className={`
-                    mt-2 
-                    text-xs 
-                    ease-in-out
-                    duration-300 
-                    transition-colors 
-                    not-dark:text-gray-500
-                `}
+          className={`mt-2 text-xs transition-colors duration-300 ease-in-out not-dark:text-gray-500`}
         >
           {version}
         </p>
@@ -156,17 +94,10 @@ export default function DownloadCard({
         color='red'
         variant='filled'
         size='sm'
-        className={`
-                    font-semibold 
-                    transition-all 
-                    duration-300 
-                    ease-in-out
-                    w-full sm:w-auto
-                    ${isSelecting ? 'scale-110 shadow-lg' : ''}
-                `}
+        className={`w-full font-semibold transition-all duration-300 ease-in-out sm:w-auto ${isSelecting ? 'scale-110 shadow-lg' : ''} `}
         onClick={() => download()}
       >
-        <IconDownload className='sm:mr-0 mr-2' />
+        <IconDownload className='mr-2 sm:mr-0' />
         <span className='sm:hidden'>Download</span>
       </Button>
     </div>

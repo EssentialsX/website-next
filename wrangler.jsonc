@@ -10,33 +10,33 @@
     "nodejs_compat",
     // Allow to fetch URLs in your app
     // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public
-    "global_fetch_strictly_public"
+    "global_fetch_strictly_public",
   ],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
       // The service should match the "name" of your worker
-      "service": "essentialsx-website"
-    }
+      "service": "essentialsx-website",
+    },
   ],
   "r2_buckets": [
     {
       "binding": "COMMAND_DATA_BUCKET",
-      "bucket_name": "essentialsx-cmd-data"
+      "bucket_name": "essentialsx-cmd-data",
     },
     {
       "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "essentialsx-website-next-cache"
-    }
+      "bucket_name": "essentialsx-website-next-cache",
+    },
   ],
   "routes": [
     {
       "pattern": "next.essentialsx.net",
-      "custom_domain": true
-    }
-  ]
+      "custom_domain": true,
+    },
+  ],
 }

@@ -28,7 +28,7 @@ export default function PermissionSets({
           marginBottom: { duration: 0.3, ease: 'easeInOut' },
         },
       }}
-      className='overflow-hidden mb-10'
+      className='mb-10 overflow-hidden'
       style={{ transformOrigin: 'top' }}
     >
       <motion.div
@@ -42,9 +42,9 @@ export default function PermissionSets({
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.2, delay: 0.2 }}
-          className='prose dark:prose-invert bg-gray-100 dark:bg-[#1c1e22] rounded-lg p-4 w-full max-w-none'
+          className='prose dark:prose-invert w-full max-w-none rounded-lg bg-gray-100 p-4 dark:bg-[#1c1e22]'
         >
-          <h4 className='font-semibold mb-3 text-sm'>Child Permissions</h4>
+          <h4 className='mb-3 text-sm font-semibold'>Child Permissions</h4>
           <div className='grid gap-3 sm:grid-cols-2'>
             {permissions.map((perm, idx) => (
               <motion.div
@@ -54,7 +54,7 @@ export default function PermissionSets({
                 transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
                 className='prose dark:prose-invert'
               >
-                <code className='text-xs bg-background px-2 py-1 rounded inline-block w-fit transition-colors duration-200'>
+                <code className='bg-background inline-block w-fit rounded px-2 py-1 text-xs transition-colors duration-200'>
                   {perm}
                 </code>
               </motion.div>

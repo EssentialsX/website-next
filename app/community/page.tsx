@@ -15,11 +15,11 @@ export default function Community() {
         description="Need support with EssentialsX, or just want to chat about servers and plugins? We've got you covered."
       />
 
-      <div className='max-w-6xl mx-auto px-4 py-8'>
-        <div className='grid md:grid-cols-3 gap-8'>
-          <div className='md:col-span-2 space-y-12'>
+      <div className='mx-auto max-w-6xl px-4 py-8'>
+        <div className='grid gap-8 md:grid-cols-3'>
+          <div className='space-y-12 md:col-span-2'>
             <section>
-              <h2 className='text-2xl font-bold mb-4'>
+              <h2 className='mb-4 text-2xl font-bold'>
                 Join the MOSS community on Discord
               </h2>
               <p className='mb-4'>
@@ -39,7 +39,7 @@ export default function Community() {
             </section>
 
             <section>
-              <h2 className='text-2xl font-bold mb-4'>
+              <h2 className='mb-4 text-2xl font-bold'>
                 Discuss EssentialsX on GitHub
               </h2>
               <p className='mb-4'>
@@ -56,7 +56,7 @@ export default function Community() {
             </section>
 
             <section>
-              <h2 className='text-2xl font-bold mb-4'>Visit us on Patreon</h2>
+              <h2 className='mb-4 text-2xl font-bold'>Visit us on Patreon</h2>
               <p className='mb-4'>
                 Feeling generous or just want to say hi? You can see news
                 updates, chat to other patrons and leave comments for us over on
@@ -71,13 +71,13 @@ export default function Community() {
           </div>
 
           <div className='space-y-8'>
-            <div className='bg-blue-600 text-white p-6 rounded-lg text-center'>
-              <h3 className='font-bold mb-2'>
+            <div className='rounded-lg bg-blue-600 p-6 text-center text-white'>
+              <h3 className='mb-2 font-bold'>
                 EssentialsX is part of MOSS on Discord
               </h3>
-              <div className='flex justify-between mb-2'>
+              <div className='mb-2 flex justify-between'>
                 <div>
-                  <p className='text-3xl font-bold w-24'>
+                  <p className='w-24 text-3xl font-bold'>
                     <CountUp start={0} end={discord.members} />
                   </p>
                   <p className='text-sm'>ONLINE</p>
@@ -92,17 +92,17 @@ export default function Community() {
               </Button>
             </div>
 
-            <div className='bg-red-400 text-white p-6 rounded-lg text-center'>
-              <h3 className='font-bold mb-2'>Support EssentialsX on Patreon</h3>
-              <div className='flex justify-between mb-2'>
+            <div className='rounded-lg bg-red-400 p-6 text-center text-white'>
+              <h3 className='mb-2 font-bold'>Support EssentialsX on Patreon</h3>
+              <div className='mb-2 flex justify-between'>
                 <div>
-                  <p className='text-3xl font-bold w-24'>
+                  <p className='w-24 text-3xl font-bold'>
                     <CountUp start={0} end={patreon.patrons} />
                   </p>
                   <p className='text-sm'>PATRONS</p>
                 </div>
                 <div>
-                  <p className='text-3xl font-bold w-34'>
+                  <p className='w-34 text-3xl font-bold'>
                     <CountUp
                       start={0}
                       end={Math.round(patreon.sum / 100)}
@@ -117,17 +117,17 @@ export default function Community() {
               </Button>
             </div>
 
-            <div className='bg-gray-700 text-white p-6 rounded-lg text-center'>
-              <h3 className='font-bold mb-2'>EssentialsX is open source</h3>
-              <div className='flex justify-between mb-2'>
+            <div className='rounded-lg bg-gray-700 p-6 text-center text-white'>
+              <h3 className='mb-2 font-bold'>EssentialsX is open source</h3>
+              <div className='mb-2 flex justify-between'>
                 <div>
-                  <p className='text-3xl font-bold w-24'>
+                  <p className='w-24 text-3xl font-bold'>
                     <CountUp start={0} end={github.stars} />
                   </p>
                   <p className='text-sm'>STARS</p>
                 </div>
                 <div>
-                  <p className='text-3xl font-bold w-24'>
+                  <p className='w-24 text-3xl font-bold'>
                     <CountUp start={0} end={github.forks} />
                   </p>
                   <p className='text-sm'>FORKS</p>

@@ -2,7 +2,7 @@ import { List, ListItem, Text } from '@mantine/core';
 
 export default function DownloadWarnings() {
   return (
-    <div className='md:w-72 not-dark:bg-red-100 border-red-500 p-4 border-l-4'>
+    <div className='border-l-4 border-red-500 p-4 not-dark:bg-red-100 md:w-72'>
       <Text fw={700}>EssentialsX does not support</Text>
       <List spacing='xs' size='sm' mt='sm'>
         <ListItem>

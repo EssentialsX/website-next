@@ -10,7 +10,7 @@ export default function Home() {
         className='flex items-center'
       >
         <Container size='xl' py={80}>
-          <div className='max-w-2xl mx-auto text-center'>
+          <div className='mx-auto max-w-2xl text-center'>
             <Title order={1} size='h1' c='white' mb='md'>
               It&apos;s in the name.
             </Title>
@@ -24,11 +24,11 @@ export default function Home() {
 
       <Container size='xl'>
         <Stack gap={40} className='py-10 md:py-20'>
-          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
+          <div className='grid items-center gap-8 md:grid-cols-[300px_1fr] md:gap-16'>
             <div className='flex justify-center'>
               <IconTools
                 size={120}
-                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                className='text-gray-600 md:h-[180px] md:w-[180px]'
                 stroke={1}
               />
             </div>
@@ -67,11 +67,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
+          <div className='grid items-center gap-8 md:grid-cols-[300px_1fr] md:gap-16'>
             <div className='flex justify-center'>
               <IconUsers
                 size={120}
-                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                className='text-gray-600 md:h-[180px] md:w-[180px]'
                 stroke={1}
               />
             </div>
@@ -127,11 +127,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='grid md:grid-cols-[300px_1fr] gap-8 md:gap-16 items-center'>
+          <div className='grid items-center gap-8 md:grid-cols-[300px_1fr] md:gap-16'>
             <div className='flex justify-center'>
               <IconCheck
                 size={120}
-                className='text-gray-600 md:w-[180px] md:h-[180px]'
+                className='text-gray-600 md:h-[180px] md:w-[180px]'
                 stroke={1}
               />
             </div>
