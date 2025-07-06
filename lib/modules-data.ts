@@ -1,5 +1,7 @@
+import { ModuleType } from '@/lib/build-utils';
+
 export interface Module {
-  id: string;
+  id: ModuleType;
   name: string;
   description: string;
   recommended?: boolean;

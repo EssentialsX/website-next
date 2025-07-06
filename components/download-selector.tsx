@@ -135,12 +135,24 @@ export default function DownloadSelector() {
         )
       </span>;
 
-  const toggleModule = (moduleId: string) => {
-    setSelectedModules(prev =>
-      prev.includes(moduleId) ?
-        prev.filter(id => id !== moduleId)
-      : [...prev, moduleId],
-    );
+  const toggleModule = (moduleId: ModuleType) => {
+    setSelectedModules(prev => {
+      let next: string[];
+      if (prev.includes(moduleId)) {
+        next = prev.filter(id => id !== moduleId);
+        // If discord is being toggled off, also unselect discordlink
+        if (moduleId === 'discord' && next.includes('discordlink')) {
+          next = next.filter(id => id !== 'discordlink');
+        }
+      } else {
+        next = [...prev, moduleId];
+        // If discordlink is being toggled on, also select discord
+        if (moduleId === 'discordlink' && !next.includes('discord')) {
+          next.push('discord');
+        }
+      }
+      return next;
+    });
   };
 
   return (
