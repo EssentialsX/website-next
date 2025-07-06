@@ -9,11 +9,11 @@ export default function WikiSidebar() {
   const path = usePathname();
 
   return (
-    <aside className='w-64 min-w-64 rounded-lg bg-[#1c1e22] p-4'>
+    <aside className='dark:bg-dark-600 w-64 min-w-64 rounded-lg p-4 not-dark:bg-gray-200'>
       <div>
         {Object.keys(wikiNavigation).map((category, index) => (
           <div key={index} className='mb-6'>
-            <Text size='sm' fw={700} c='dimmed' mb={4}>
+            <Text size='sm' fw={700} mb={4}>
               {category}
             </Text>
             <div className='space-y-1'>
@@ -21,10 +21,8 @@ export default function WikiSidebar() {
                 <Link
                   key={linkIndex}
                   href={link.slug ? `/wiki/${link.slug}` : link.href!}
-                  className={`block rounded px-2 py-1 text-sm leading-relaxed hover:bg-[#d91c1c] ${
-                    path === `/wiki/${link.slug}` ?
-                      'bg-[#d91c1c] text-white'
-                    : 'text-gray-300'
+                  className={`block rounded px-2 py-1 text-sm leading-relaxed hover:bg-red-400 hover:text-white ${
+                    path === `/wiki/${link.slug}` && 'bg-red-500 text-white'
                   }`}
                 >
                   {link.title}
