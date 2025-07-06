@@ -32,5 +32,11 @@
       "binding": "NEXT_INC_CACHE_R2_BUCKET",
       "bucket_name": "essentialsx-website-next-cache"
     }
+  ],
+  "routes": [
+    {
+      "pattern": "next.essentialsx.net",
+      "custom_domain": true
+    }
   ]
 }

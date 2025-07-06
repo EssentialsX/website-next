@@ -5,7 +5,6 @@ import { useSharedData } from '@/contexts/shared-data';
 import {
   ActionIcon,
   Container,
-  Group,
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
