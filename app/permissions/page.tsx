@@ -98,7 +98,7 @@ export default function Permissions() {
         description={`EssentialsX permissions reference for ${permsCount} permissions.`}
       />
       <div className='container mx-auto flex-1 px-4 py-8'>
-        <div className='bg-background overflow-hidden rounded-lg border shadow-sm'>
+        <div className='bg-background overflow-hidden rounded-lg border border-gray-300 shadow-sm dark:border-gray-700'>
           <div className='w-full'>
             <div className='flex flex-col gap-4 border-b border-gray-300 p-4 sm:flex-row dark:border-gray-700'>
               <TextInput
