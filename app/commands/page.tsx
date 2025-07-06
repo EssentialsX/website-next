@@ -104,13 +104,13 @@ export default function Commands() {
       <div className='flex-1 container mx-auto px-4 py-8'>
         <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
           <div className='w-full'>
-            <div className='flex gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
+            <div className='flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
               <TextInput
                 placeholder='Search commands'
                 leftSection={<IconSearch size={16} />}
                 value={search}
                 onChange={e => setSearch(e.currentTarget.value)}
-                style={{ flex: 1 }}
+                className='flex-1'
               />
               <Select
                 placeholder='Filter module'
@@ -119,9 +119,11 @@ export default function Commands() {
                 onChange={value =>
                   setModuleFilter(value === 'All' ? null : value)
                 }
+                className='sm:min-w-40'
               />
             </div>
-            <div className='grid grid-cols-5 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
+            {/* Desktop table header - hidden on mobile */}
+            <div className='hidden lg:grid grid-cols-5 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
               <div>Module</div>
               <div>Command</div>
               <div>Aliases</div>
@@ -150,7 +152,8 @@ export default function Commands() {
                             id={cmd}
                             style={{ scrollMarginTop: '80px' }}
                           >
-                            <div className='grid grid-cols-5 gap-4 p-4 items-center'>
+                            {/* Desktop table row - hidden on mobile */}
+                            <div className='hidden lg:grid grid-cols-5 gap-4 p-4 items-center'>
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
@@ -228,6 +231,90 @@ export default function Commands() {
                                     </motion.div>
                                   </Button>
                                 )}
+                              </div>
+                            </div>
+
+                            {/* Mobile card layout - hidden on desktop */}
+                            <div className='lg:hidden p-4 space-y-3'>
+                              <div className='flex items-center justify-between'>
+                                <Badge variant='secondary' className='text-xs'>
+                                  {mod}
+                                </Badge>
+                                {(obj.usages?.length > 0 ||
+                                  sortedAliases.length > 1) && (
+                                  <Button
+                                    variant='subtle'
+                                    size='xs'
+                                    px={4}
+                                    className='flex-shrink-0 transition-all duration-200 hover:scale-105'
+                                    onClick={() => toggleRow(cmd)}
+                                  >
+                                    <span className='mr-1 text-xs'>
+                                      {openRow === cmd ? 'Hide' : 'Show'}{' '}
+                                      details
+                                    </span>
+                                    <motion.div
+                                      animate={{
+                                        rotate: openRow === cmd ? 180 : 0,
+                                      }}
+                                      transition={{
+                                        duration: 0.2,
+                                        ease: 'easeInOut',
+                                      }}
+                                    >
+                                      <IconChevronDown className='h-4 w-4' />
+                                    </motion.div>
+                                  </Button>
+                                )}
+                              </div>
+
+                              <div className='prose dark:prose-invert'>
+                                <a
+                                  href={`#${cmd}`}
+                                  className='flex items-center gap-1'
+                                >
+                                  <code className='px-2 py-1 rounded text-sm font-mono'>
+                                    /{cmd}
+                                  </code>
+                                  <IconHash size={14} />
+                                </a>
+                              </div>
+
+                              <div className='text-sm text-gray-600 dark:text-gray-400'>
+                                {obj.description || 'None'}
+                              </div>
+
+                              {sortedAliases.length > 0 && (
+                                <div className='space-y-1'>
+                                  <div className='text-xs font-medium text-gray-500 dark:text-gray-400'>
+                                    Aliases:
+                                  </div>
+                                  <div className='flex flex-wrap gap-1'>
+                                    {sortedAliases.slice(0, 3).map(alias => (
+                                      <code
+                                        key={alias}
+                                        className='text-xs px-1 py-0.5 rounded'
+                                      >
+                                        {alias}
+                                      </code>
+                                    ))}
+                                    {sortedAliases.length > 3 && (
+                                      <span className='text-xs text-gray-500 dark:text-gray-400'>
+                                        +{sortedAliases.length - 3} more
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+
+                              <div className='space-y-1'>
+                                <div className='text-xs font-medium text-gray-500 dark:text-gray-400'>
+                                  Usage:
+                                </div>
+                                <code className='px-2 py-1 rounded text-xs block bg-gray-100 dark:bg-gray-800 overflow-x-auto'>
+                                  /{cmd}
+                                  {obj.usage ? obj.usage.slice(10) : ''}
+                                </code>
                               </div>
                             </div>
 

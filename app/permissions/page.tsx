@@ -100,13 +100,13 @@ export default function Permissions() {
       <div className='flex-1 container mx-auto px-4 py-8'>
         <div className='bg-background rounded-lg border shadow-sm overflow-hidden'>
           <div className='w-full'>
-            <div className='flex gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
+            <div className='flex flex-col sm:flex-row gap-4 p-4 border-b border-gray-300 dark:border-gray-700'>
               <TextInput
                 placeholder='Search permissions'
                 leftSection={<IconSearch size={16} />}
                 value={search}
                 onChange={e => setSearch(e.currentTarget.value)}
-                style={{ flex: 1 }}
+                className='flex-1'
               />
               <Select
                 placeholder='Filter module'
@@ -115,9 +115,11 @@ export default function Permissions() {
                 onChange={value =>
                   setModuleFilter(value === 'All' ? null : value)
                 }
+                className='sm:min-w-40'
               />
             </div>
-            <div className='grid grid-cols-4 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
+            {/* Desktop table header - hidden on mobile */}
+            <div className='hidden lg:grid grid-cols-4 gap-4 p-4 border-b border-gray-300 dark:border-gray-700 font-semibold text-sm'>
               <div>Module</div>
               <div>Permission</div>
               <div>Description</div>
@@ -149,7 +151,8 @@ export default function Permissions() {
                             id={perm}
                             style={{ scrollMarginTop: '80px' }}
                           >
-                            <div className='grid grid-cols-4 gap-4 p-4 items-center'>
+                            {/* Desktop table row - hidden on mobile */}
+                            <div className='hidden lg:grid grid-cols-4 gap-4 p-4 items-center'>
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
@@ -202,6 +205,71 @@ export default function Permissions() {
                                 )}
                               </div>
                             </div>
+
+                            {/* Mobile card layout - hidden on desktop */}
+                            <div className='lg:hidden p-4 space-y-3'>
+                              <div className='flex items-center justify-between'>
+                                <Badge variant='secondary' className='text-xs'>
+                                  {mod}
+                                </Badge>
+                                <span className='text-sm font-medium'>
+                                  {formatDefault(obj.default)}
+                                </span>
+                              </div>
+
+                              <div className='prose dark:prose-invert'>
+                                <a
+                                  href={`#${perm}`}
+                                  className='flex items-center gap-1'
+                                >
+                                  <code className='px-2 py-1 rounded text-sm font-mono'>
+                                    {perm}
+                                  </code>
+                                  <IconHash size={14} />
+                                </a>
+                                {hasChildren && (
+                                  <Badge
+                                    variant='secondary'
+                                    className='mt-2 text-xs whitespace-nowrap'
+                                  >
+                                    Permission Group
+                                  </Badge>
+                                )}
+                              </div>
+
+                              <div className='text-sm text-gray-600 dark:text-gray-400'>
+                                {obj.description || 'None'}
+                              </div>
+
+                              {hasChildren && (
+                                <div className='flex justify-end'>
+                                  <Button
+                                    variant='subtle'
+                                    size='xs'
+                                    px={4}
+                                    className='flex-shrink-0 transition-all duration-200 hover:scale-105'
+                                    onClick={() => toggleRow(rowKey)}
+                                  >
+                                    <span className='mr-1 text-xs'>
+                                      {openRow === rowKey ? 'Hide' : 'Show'}{' '}
+                                      children
+                                    </span>
+                                    <motion.div
+                                      animate={{
+                                        rotate: openRow === rowKey ? 180 : 0,
+                                      }}
+                                      transition={{
+                                        duration: 0.2,
+                                        ease: 'easeInOut',
+                                      }}
+                                    >
+                                      <IconChevronDown className='h-4 w-4' />
+                                    </motion.div>
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+
                             <AnimatePresence>
                               {hasChildren && openRow === rowKey && (
                                 <PermissionSets
