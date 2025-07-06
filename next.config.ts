@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
+      source: '/do-not-use-mohist.html',
+      destination: '/do-not-use-mohist',
+      permanent: true,
+    },
+    {
       source: '/wiki',
       destination: '/wiki/introduction',
       permanent: true,
