@@ -53,12 +53,23 @@ export default function Dump({
               value: essData['ess-data']['update-data'].branch,
             },
             {
-              label: 'Branch',
-              value: essData['ess-data']['update-data'].branch,
+              label: 'Economy Layer',
+              value:
+                essData['ess-data']['economy-layer'].enabled ?
+                  essData['ess-data']['economy-layer'].name === 'null' ?
+                    'None'
+                  : essData['ess-data']['economy-layer'].name
+                : 'Disabled',
             },
             {
-              label: 'Dev Build',
-              value: essData['ess-data']['update-data'].dev ? 'Yes' : 'No',
+              label: 'Layer Backend',
+              value:
+                (
+                  essData['ess-data']['economy-layer']['backend-name'] ===
+                  'null'
+                ) ?
+                  'N/A'
+                : essData['ess-data']['economy-layer']['backend-name'],
             },
           ]}
         />
@@ -78,11 +89,17 @@ export default function Dump({
             },
             {
               label: 'Online Mode',
-              value: essData['server-data']['online-mode'],
+              value: essData['server-data']['online-mode'] || 'Not Provided',
             },
             {
               label: 'Support Status',
-              value: essData['server-data']['support-status'].status,
+              value:
+                essData['server-data']['support-status'].status +
+                ' (' +
+                (essData['server-data']['support-status'].supported ?
+                  'Supported'
+                : 'Unsupported') +
+                ')',
             },
             {
               label: 'Support Trigger',
