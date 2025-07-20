@@ -20,8 +20,7 @@ import {
   IconChevronUp,
   IconSearch,
 } from '@tabler/icons-react';
-import { useVirtualizer } from '@tanstack/react-virtual';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function DumpPluginsCard({
   title,
@@ -33,7 +32,6 @@ export default function DumpPluginsCard({
   const [sectionOpen, setSectionOpen] = useState(false);
   const [expandedPlugin, setExpandedPlugin] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const parentRef = useRef<HTMLDivElement>(null);
 
   const filteredPlugins = useMemo(
     () =>
@@ -42,15 +40,6 @@ export default function DumpPluginsCard({
       ),
     [plugins, searchQuery],
   );
-
-  const shouldVirtualize = filteredPlugins.length > 50;
-
-  const virtualizer = useVirtualizer({
-    count: filteredPlugins.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 60, // Approximate height of each plugin row
-    overscan: 5,
-  });
 
   const renderPlugin = (plugin: DumpPlugin) => (
     <div key={plugin.name}>
@@ -176,32 +165,9 @@ export default function DumpPluginsCard({
           />
         </Box>
 
-        {shouldVirtualize ?
-          <ScrollArea ref={parentRef} h={400} scrollbarSize={8}>
-            <div
-              style={{
-                height: virtualizer.getTotalSize(),
-                width: '100%',
-                position: 'relative',
-              }}
-            >
-              {virtualizer.getVirtualItems().map(virtualItem => (
-                <div
-                  key={virtualItem.key}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    transform: `translateY(${virtualItem.start}px)`,
-                  }}
-                >
-                  {renderPlugin(filteredPlugins[virtualItem.index])}
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        : <div>{filteredPlugins.map(renderPlugin)}</div>}
+        <ScrollArea h={400} scrollbarSize={8}>
+          <div>{filteredPlugins.map(renderPlugin)}</div>
+        </ScrollArea>
       </Collapse>
     </Card>
   );
