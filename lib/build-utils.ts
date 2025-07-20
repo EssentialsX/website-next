@@ -39,3 +39,17 @@ export function getCommitIdFromArtifact(name: string): string | undefined {
   const match = versionRegex.exec(name);
   return match && match[2] ? match[2] : undefined;
 }
+
+export function extractBuildNumber(version: string): number | null {
+  const match = version.match(/-dev\+(\d+)/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
+export function extractBaseVersion(version: string): string {
+  const match = version.match(/^([0-9.]+)/);
+  return match ? match[1] : version;
+}
+
+export function isDevBuild(version: string): boolean {
+  return version.includes('-dev+');
+}

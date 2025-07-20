@@ -3,7 +3,15 @@ import { Card, CardSection, SimpleGrid, Text, Title } from '@mantine/core';
 interface DumpCardProps {
   title: string;
   color: string;
-  data: { label: string; value: string }[];
+  data: {
+    label: string;
+    value: string;
+    status?: {
+      type: 'outdated' | 'latest';
+      message: string;
+      buildsBehind?: number;
+    };
+  }[];
 }
 
 export default function DumpCard({ title, color, data }: DumpCardProps) {
@@ -28,6 +36,16 @@ export default function DumpCard({ title, color, data }: DumpCardProps) {
               <Text size='sm' fw={700}>
                 {item.value}
               </Text>
+              {item.status && (
+                <Text
+                  size='xs'
+                  c={item.status.type === 'outdated' ? 'red' : 'green'}
+                  mt={2}
+                  fw={500}
+                >
+                  {item.status.message}
+                </Text>
+              )}
             </div>
           ))}
         </SimpleGrid>

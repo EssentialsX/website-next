@@ -1,6 +1,12 @@
 import DumpCard from '@/components/dump/dump-card';
 import DumpFileCard from '@/components/dump/dump-file-card';
 import DumpPluginsCard from '@/components/dump/dump-plugins-card';
+import { useSharedData } from '@/contexts/shared-data';
+import {
+  extractBaseVersion,
+  extractBuildNumber,
+  isDevBuild,
+} from '@/lib/build-utils';
 import { DumpData, DumpPaste } from '@/lib/dump-utils';
 import { Card, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
@@ -15,6 +21,7 @@ export default function Dump({
   dump: DumpPaste;
   sourceType?: 'bytebin' | 'gist';
 }) {
+  const { devBuild, stableBuild } = useSharedData();
   const files = useMemo(() => dump.files, [dump.files]);
 
   const essRawData = useMemo(
@@ -73,38 +80,99 @@ export default function Dump({
     return <div />;
   }
 
+  const currentVersion = essData['ess-data'].version;
+  const currentBranch = essData['ess-data']['update-data'].branch;
+  const isDev = essData['ess-data']['update-data'].dev;
+
+  let versionStatus:
+    | {
+        type: 'outdated' | 'latest';
+        message: string;
+        buildsBehind?: number;
+      }
+    | undefined = undefined;
+
+  if (isDev && isDevBuild(currentVersion) && devBuild) {
+    const currentBaseVersion = extractBaseVersion(currentVersion);
+    const latestBaseVersion = extractBaseVersion(devBuild.version);
+
+    // Only compare build numbers if they're from the same base version
+    if (currentBaseVersion === latestBaseVersion) {
+      const currentBuildNumber = extractBuildNumber(currentVersion);
+      const latestBuildNumber = extractBuildNumber(devBuild.version);
+
+      if (currentBuildNumber && latestBuildNumber) {
+        const buildsBehind = latestBuildNumber - currentBuildNumber;
+        if (buildsBehind > 0) {
+          versionStatus = {
+            type: 'outdated',
+            message: `${buildsBehind} build${buildsBehind === 1 ? '' : 's'} behind latest dev build`,
+            buildsBehind,
+          };
+        } else if (buildsBehind === 0) {
+          versionStatus = {
+            type: 'latest',
+            message: 'Latest dev build',
+          };
+        }
+      }
+    } else {
+      // Different base versions - can't compare build numbers meaningfully
+      versionStatus = {
+        type: 'outdated',
+        message: 'Very out of date (different release)',
+      };
+    }
+  } else if (!isDev && stableBuild) {
+    // For stable builds, just compare version strings
+    if (currentVersion !== stableBuild.version) {
+      versionStatus = {
+        type: 'outdated',
+        message: 'Outdated',
+      };
+    } else {
+      versionStatus = {
+        type: 'latest',
+        message: 'Latest stable version',
+      };
+    }
+  }
+
+  const versionData = [
+    {
+      label: 'Version',
+      value: currentVersion,
+      status: versionStatus,
+    },
+    {
+      label: 'Branch',
+      value: currentBranch,
+    },
+    {
+      label: 'Economy Layer',
+      value:
+        essData['ess-data']['economy-layer'].enabled ?
+          essData['ess-data']['economy-layer'].name === 'null' ?
+            'None'
+          : essData['ess-data']['economy-layer'].name
+        : 'Disabled',
+    },
+    {
+      label: 'Layer Backend',
+      value:
+        essData['ess-data']['economy-layer']['backend-name'] === 'null' ?
+          'N/A'
+        : essData['ess-data']['economy-layer']['backend-name'],
+    },
+  ];
+
   return (
     <div>
       <Stack gap={10} p={20}>
         <DumpCard
           title='Essentials Version'
           color='#d9534f'
-          data={[
-            { label: 'Version', value: essData['ess-data'].version },
-            {
-              label: 'Branch',
-              value: essData['ess-data']['update-data'].branch,
-            },
-            {
-              label: 'Economy Layer',
-              value:
-                essData['ess-data']['economy-layer'].enabled ?
-                  essData['ess-data']['economy-layer'].name === 'null' ?
-                    'None'
-                  : essData['ess-data']['economy-layer'].name
-                : 'Disabled',
-            },
-            {
-              label: 'Layer Backend',
-              value:
-                (
-                  essData['ess-data']['economy-layer']['backend-name'] ===
-                  'null'
-                ) ?
-                  'N/A'
-                : essData['ess-data']['economy-layer']['backend-name'],
-            },
-          ]}
+          data={versionData}
         />
 
         <DumpCard
