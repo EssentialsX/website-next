@@ -4,6 +4,7 @@ import DumpPluginsCard from '@/components/dump/dump-plugins-card';
 import { DumpData, DumpPaste } from '@/lib/dump-utils';
 import { Card, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 export default function Dump({
   id,
@@ -14,27 +15,59 @@ export default function Dump({
   dump: DumpPaste;
   sourceType?: 'bytebin' | 'gist';
 }) {
-  const files = dump.files;
+  const files = useMemo(() => dump.files, [dump.files]);
 
-  const essRawData = files.find(f => f.name === 'dump.json')?.content?.value;
-  const essData = essRawData ? (JSON.parse(essRawData) as DumpData) : null;
+  const essRawData = useMemo(
+    () => files.find(f => f.name === 'dump.json')?.content?.value,
+    [files],
+  );
+  const essData = useMemo(
+    () => (essRawData ? (JSON.parse(essRawData) as DumpData) : null),
+    [essRawData],
+  );
 
-  const configData = files.find(f => f.name === 'config.yml')?.content?.value;
-  const kitsData = files.find(f => f.name === 'kits.yml')?.content?.value;
-  const discordData = files.find(f => f.name === 'discord-config.yml')?.content
-    ?.value;
+  const configData = useMemo(
+    () => files.find(f => f.name === 'config.yml')?.content?.value,
+    [files],
+  );
+  const kitsData = useMemo(
+    () => files.find(f => f.name === 'kits.yml')?.content?.value,
+    [files],
+  );
+  const discordData = useMemo(
+    () => files.find(f => f.name === 'discord-config.yml')?.content?.value,
+    [files],
+  );
   const discordLinkData = files.find(f => f.name === 'discord-link-config.yml')
     ?.content?.value;
-  const logData = files.find(f => f.name === 'latest.log')?.content?.value;
-  const worthData = files.find(f => f.name === 'worth.yml')?.content?.value;
-  const spawnData = files.find(f => f.name === 'spawn.yml')?.content?.value;
-  const commandsData = files.find(f => f.name === 'commands.yml')?.content
-    ?.value;
-  const commandMapData = files.find(f => f.name === 'commandmap.json')?.content
-    ?.value;
-  const commandOverrideData = files.find(f => f.name === 'commandoverride.json')
-    ?.content?.value;
-  const tprData = files.find(f => f.name === 'tpr.yml')?.content?.value;
+  const logData = useMemo(
+    () => files.find(f => f.name === 'latest.log')?.content?.value,
+    [files],
+  );
+  const worthData = useMemo(
+    () => files.find(f => f.name === 'worth.yml')?.content?.value,
+    [files],
+  );
+  const spawnData = useMemo(
+    () => files.find(f => f.name === 'spawn.yml')?.content?.value,
+    [files],
+  );
+  const commandsData = useMemo(
+    () => files.find(f => f.name === 'commands.yml')?.content?.value,
+    [files],
+  );
+  const commandMapData = useMemo(
+    () => files.find(f => f.name === 'commandmap.json')?.content?.value,
+    [files],
+  );
+  const commandOverrideData = useMemo(
+    () => files.find(f => f.name === 'commandoverride.json')?.content?.value,
+    [files],
+  );
+  const tprData = useMemo(
+    () => files.find(f => f.name === 'tpr.yml')?.content?.value,
+    [files],
+  );
 
   if (!essData) {
     return <div />;
