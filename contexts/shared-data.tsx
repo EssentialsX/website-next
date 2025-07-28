@@ -1,11 +1,11 @@
 'use client';
 
+import { fetchVersionData } from '@/app/actions';
 import {
   getCommitIdFromArtifact,
   getModuleIdFromArtifact,
   getVersionFromArtifact,
 } from '@/lib/build-utils';
-import { getVersionData } from '@/lib/cloudflare';
 import { getDiscordMemberCount } from '@/lib/discord';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
@@ -216,8 +216,8 @@ export const SharedDataProvider = ({
     setDownloads(count);
   };
 
-  const fetchVersionData = async () => {
-    const { supportedVersions } = await getVersionData();
+  const loadVersionData = async () => {
+    const { supportedVersions } = await fetchVersionData();
 
     const versionStrings = supportedVersions.map(v =>
       v.slice(0, v.indexOf('-')),
@@ -232,7 +232,7 @@ export const SharedDataProvider = ({
     void fetchDiscordData();
     void fetchBuildData();
     void fetchDownloads();
-    void fetchVersionData();
+    void loadVersionData();
   }, []);
 
   return (
