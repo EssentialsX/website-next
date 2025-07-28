@@ -5,6 +5,7 @@ import {
   getModuleIdFromArtifact,
   getVersionFromArtifact,
 } from '@/lib/build-utils';
+import { getVersionData } from '@/lib/cloudflare';
 import { getDiscordMemberCount } from '@/lib/discord';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
@@ -24,6 +25,8 @@ type SharedData = {
   devBuild: BuildData | undefined;
   stableBuild: BuildData | undefined;
   downloads: number;
+  activeVersion: string;
+  legacyVersions: string[];
 };
 
 type BuildData = {
@@ -60,6 +63,12 @@ export const SharedDataProvider = ({
     undefined,
   );
   const [downloads, setDownloads] = useState(7000000);
+  const [activeVersion, setActiveVersion] = useState('1.21.8');
+  const [legacyVersions, setLegacyVersions] = useState<string[]>([
+    '1.8.8',
+    '1.12.2',
+    '1.20.6',
+  ]);
 
   const fetchGithubData = async () => {
     let stars = 2000;
@@ -207,17 +216,37 @@ export const SharedDataProvider = ({
     setDownloads(count);
   };
 
+  const fetchVersionData = async () => {
+    const { supportedVersions } = await getVersionData();
+
+    const versionStrings = supportedVersions.map(v =>
+      v.slice(0, v.indexOf('-')),
+    );
+    setActiveVersion(versionStrings[versionStrings.length - 1]);
+    setLegacyVersions(versionStrings.slice(0, -1));
+  };
+
   useEffect(() => {
-    fetchGithubData();
-    fetchPatreonData();
-    fetchDiscordData();
-    fetchBuildData();
-    fetchDownloads();
+    void fetchGithubData();
+    void fetchPatreonData();
+    void fetchDiscordData();
+    void fetchBuildData();
+    void fetchDownloads();
+    void fetchVersionData();
   }, []);
 
   return (
     <SharedDataContext.Provider
-      value={{ github, patreon, discord, devBuild, stableBuild, downloads }}
+      value={{
+        github,
+        patreon,
+        discord,
+        devBuild,
+        stableBuild,
+        downloads,
+        activeVersion,
+        legacyVersions,
+      }}
     >
       {children}
     </SharedDataContext.Provider>

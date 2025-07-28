@@ -17,3 +17,7 @@ export type Permission = {
 };
 
 export type PermissionData = Record<string, Permission>;
+
+export type VersionData = {
+  supportedVersions: string[];
+};

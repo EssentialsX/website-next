@@ -1,4 +1,4 @@
-import { CommandData, PermissionData } from '@/lib/types';
+import { CommandData, PermissionData, VersionData } from '@/lib/types';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 async function getR2Bucket() {
@@ -17,6 +17,31 @@ const MODULES = [
   'Spawn',
   'XMPP',
 ];
+
+export async function getVersionData() {
+  if (process.env.NODE_ENV === 'development') {
+    return {
+      supportedVersions: [
+        '1.8.8-R0.1-SNAPSHOT',
+        '1.12.2-R0.1-SNAPSHOT',
+        '1.20.6-R0.1-SNAPSHOT',
+        '1.21.8-R0.1-SNAPSHOT',
+      ],
+    } satisfies VersionData;
+  }
+
+  const bucket = await getR2Bucket();
+  if (!bucket) {
+    throw new Error('R2 bucket not found');
+  }
+
+  const file = await bucket.get('version-data.json');
+  if (!file) {
+    throw new Error('Version data file not found');
+  }
+
+  return (await file.json()) satisfies VersionData;
+}
 
 async function getData<T>(
   type: 'commands' | 'permissions',

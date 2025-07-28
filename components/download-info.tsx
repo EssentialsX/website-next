@@ -1,6 +1,19 @@
+import { useSharedData } from '@/contexts/shared-data';
 import { List, ListItem, Text } from '@mantine/core';
+import { useMemo } from 'react';
 
 export default function DownloadInfo() {
+  const { activeVersion, legacyVersions } = useSharedData();
+
+  const legacyVersionString = useMemo(() => {
+    const formatter = new Intl.ListFormat('en', {
+      style: 'long',
+      type: 'conjunction',
+    });
+
+    return formatter.format(legacyVersions);
+  }, [legacyVersions]);
+
   return (
     <div className='dark:bg-dark-600 border-l-4 border-blue-500 p-4 not-dark:bg-blue-50 md:w-72'>
       <Text>
@@ -10,18 +23,15 @@ export default function DownloadInfo() {
       <List spacing='xs' size='sm' mt='sm'>
         <ListItem>
           <Text>
-            <b>✅ 1.21.7</b> - EssentialsX actively develops against and
-            supports these versions.
+            <b>✅ {activeVersion}</b> - EssentialsX actively develops against
+            and supports these versions.
           </Text>
         </ListItem>
         <ListItem>
           <Text>
-            <b>
-              ⚠️ 1.8.8, 1.9.4, 1.10.2, 1.11.2, 1.12.2, 1.13.2, 1.14.4, 1.15.2,
-              1.16.5, 1.17.1, 1.18.2, 1.19.4, and 1.20.6
-            </b>{' '}
-            - These versions are still supported, but are not a priority for us,
-            and may be dropped in a future release.
+            <b>⚠️ {legacyVersionString}</b> - These versions are still
+            supported, but are not a priority for us, and may be dropped in a
+            future release.
           </Text>
         </ListItem>
       </List>
