@@ -3,24 +3,107 @@
 import StatBadge from '@/components/stat-badge';
 import { useSharedData } from '@/contexts/shared-data';
 import {
-  ActionIcon,
+  Center,
   Container,
+  SegmentedControl,
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
-import { IconMoon, IconSun } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
+import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
+type ThemeMode = 'light' | 'dark' | 'auto';
+
+const THEME_STORAGE_KEY = 'theme-mode';
+
+const getSystemTheme = (): 'light' | 'dark' => {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ?
+      'dark'
+    : 'light';
+};
+
+const applyTheme = (
+  mode: ThemeMode,
+  setColorScheme: (scheme: 'light' | 'dark') => void,
+) => {
+  if (mode === 'auto') {
+    setColorScheme(getSystemTheme());
+  } else {
+    setColorScheme(mode);
+  }
+};
+
+const themeControlData = [
+  {
+    value: 'light' as const,
+    label: (
+      <Center style={{ gap: 8 }}>
+        <IconSun size={16} />
+        <span>Light</span>
+      </Center>
+    ),
+  },
+  {
+    value: 'dark' as const,
+    label: (
+      <Center style={{ gap: 8 }}>
+        <IconMoon size={16} />
+        <span>Dark</span>
+      </Center>
+    ),
+  },
+  {
+    value: 'auto' as const,
+    label: (
+      <Center style={{ gap: 8 }}>
+        <IconDeviceDesktop size={16} />
+        <span>Auto</span>
+      </Center>
+    ),
+  },
+];
 
 export default function Footer() {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme();
   const { downloads, discord, github, stableBuild, devBuild } = useSharedData();
-  const [mounted, setMounted] = useState(false);
+  const [themeMode, setThemeMode] = useState<ThemeMode>('auto');
 
-  const year = new Date().getFullYear();
+  const year = useMemo(() => new Date().getFullYear(), []);
+
+  const handleSystemThemeChange = useCallback(
+    (e: MediaQueryListEvent) => {
+      setThemeMode(currentMode => {
+        if (currentMode === 'auto') {
+          setColorScheme(e.matches ? 'dark' : 'light');
+        }
+        return currentMode;
+      });
+    },
+    [setColorScheme],
+  );
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    const savedThemeMode = localStorage.getItem(
+      THEME_STORAGE_KEY,
+    ) as ThemeMode | null;
+    const initialThemeMode = savedThemeMode || 'auto';
+    setThemeMode(initialThemeMode);
+    applyTheme(initialThemeMode, setColorScheme);
+  }, [setColorScheme]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () =>
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, [handleSystemThemeChange]);
+
+  const handleThemeChange = (value: string) => {
+    const newThemeMode = value as ThemeMode;
+    setThemeMode(newThemeMode);
+    localStorage.setItem(THEME_STORAGE_KEY, newThemeMode);
+    applyTheme(newThemeMode, setColorScheme);
+  };
 
   return (
     <footer className='mt-2'>
@@ -58,21 +141,22 @@ export default function Footer() {
           />
         </div>
         <div className='flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between'>
-          <Text size='sm' c='dimmed' className='text-center sm:text-left'>
+          <Text
+            size='sm'
+            c='dimmed'
+            className='self-center text-center sm:text-left'
+          >
             Website copyright © 2019-{year} EssentialsX Team, 2015-{year}{' '}
             EssentialsX wiki contributors except where otherwise noted.
           </Text>
-          <ActionIcon
-            onClick={() => toggleColorScheme()}
-            variant='default'
-            size='lg'
-            aria-label='Toggle color scheme'
-            className='flex-shrink-0'
-          >
-            {mounted && colorScheme === 'dark' ?
-              <IconSun size='1.1rem' />
-            : <IconMoon size='1.1rem' />}
-          </ActionIcon>
+          <SegmentedControl
+            value={themeMode}
+            onChange={handleThemeChange}
+            size='sm'
+            aria-label='Color scheme selector'
+            className='flex-shrink-0 self-center'
+            data={themeControlData}
+          />
         </div>
       </Container>
     </footer>
