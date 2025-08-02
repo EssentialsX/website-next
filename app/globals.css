@@ -25,7 +25,7 @@
 .prose code:not(pre code) {
   @apply not-dark:bg-gray-200;
   @apply dark:bg-gray-800;
-  @apply text-red-500;
+  @apply text-red-400;
   @apply p-1;
   border-radius: 0.25rem;
 }
