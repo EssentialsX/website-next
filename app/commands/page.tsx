@@ -5,6 +5,7 @@ import CommandAliases from '@/components/command-aliases';
 import CommandUsages from '@/components/command-usages';
 import PageHeader from '@/components/page-header';
 
+import { CopyButton } from '@/components/copy-button';
 import { Command, CommandData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
 import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
@@ -156,15 +157,17 @@ export default function Commands() {
                               </div>
 
                               <div className='prose dark:prose-invert flex items-center text-sm'>
-                                <a
-                                  href={`#${cmd}`}
-                                  className='flex items-center gap-1'
-                                >
+                                <div className='flex items-center gap-1'>
                                   <code className='rounded px-2 py-1 text-xs'>
                                     /{cmd}
                                   </code>
-                                  <IconHash size={14} />
-                                </a>
+                                  <CopyButton
+                                    value={`${window.location.href.split('#')[0]}#${cmd}`}
+                                    size={14}
+                                  >
+                                    <IconHash size={14} />
+                                  </CopyButton>
+                                </div>
                               </div>
 
                               <div className='prose dark:prose-invert'>
@@ -256,15 +259,17 @@ export default function Commands() {
                               </div>
 
                               <div className='prose dark:prose-invert'>
-                                <a
-                                  href={`#${cmd}`}
-                                  className='flex items-center gap-1'
-                                >
+                                <div className='flex items-center gap-1'>
                                   <code className='rounded px-2 py-1 font-mono text-sm'>
                                     /{cmd}
                                   </code>
-                                  <IconHash size={14} />
-                                </a>
+                                  <CopyButton
+                                    value={`${window.location.href.split('#')[0]}#${cmd}`}
+                                    size={14}
+                                  >
+                                    <IconHash size={14} />
+                                  </CopyButton>
+                                </div>
                               </div>
 
                               <div className='text-sm text-gray-600 dark:text-gray-400'>
