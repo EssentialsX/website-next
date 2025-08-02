@@ -288,7 +288,7 @@ export default function Commands() {
                                   <div className='text-xs font-medium text-gray-500 dark:text-gray-400'>
                                     Aliases:
                                   </div>
-                                  <div className='flex flex-wrap gap-1'>
+                                  <div className='prose dark:prose-invert flex flex-wrap items-center gap-1'>
                                     {sortedAliases.slice(0, 3).map(alias => (
                                       <code
                                         key={alias}
@@ -306,7 +306,7 @@ export default function Commands() {
                                 </div>
                               )}
 
-                              <div className='space-y-1'>
+                              <div className='prose dark:prose-invert space-y-1'>
                                 <div className='text-xs font-medium text-gray-500 dark:text-gray-400'>
                                   Usage:
                                 </div>
