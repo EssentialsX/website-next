@@ -24,7 +24,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <Group visibleFrom='sm'>
+        <Group visibleFrom='md'>
           <Button component={Link} c='white' href='/community' variant='subtle'>
             Community
           </Button>
@@ -51,7 +51,7 @@ export default function Header() {
         <Burger
           opened={opened}
           onClick={open}
-          hiddenFrom='sm'
+          hiddenFrom='md'
           color='white'
           size='sm'
         />
