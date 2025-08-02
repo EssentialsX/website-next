@@ -3,10 +3,24 @@
 import { fetchPermissions } from '@/app/actions';
 import PageHeader from '@/components/page-header';
 
+import { CopyButton } from '@/components/copy-button';
 import PermissionSets from '@/components/permission-sets';
 import { Permission, PermissionData } from '@/lib/types';
-import { Badge, Button, Select, TextInput } from '@mantine/core';
-import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
+import {
+  Badge,
+  Button,
+  CopyButton as MantineCopyButton,
+  Select,
+  TextInput,
+  Tooltip,
+  UnstyledButton,
+} from '@mantine/core';
+import {
+  IconChevronDown,
+  IconCopy,
+  IconHash,
+  IconSearch,
+} from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
@@ -159,23 +173,40 @@ export default function Permissions() {
                                 </Badge>
                               </div>
                               <div className='prose dark:prose-invert'>
-                                <a
-                                  href={`#${perm}`}
-                                  className='flex items-center gap-1'
-                                >
-                                  <code className='rounded px-2 py-1 text-xs'>
-                                    {perm}
-                                  </code>
-                                  <IconHash size={14} />
-                                </a>
-                                {hasChildren && (
-                                  <Badge
-                                    variant='secondary'
-                                    className='mt-1 text-xs whitespace-nowrap'
+                                <div className='flex items-center gap-1'>
+                                  <MantineCopyButton value={perm}>
+                                    {({ copied, copy }) => (
+                                      <Tooltip
+                                        label={
+                                          copied ? 'Copied!' : (
+                                            'Copy to clipboard'
+                                          )
+                                        }
+                                        withArrow
+                                      >
+                                        <UnstyledButton onClick={copy}>
+                                          <code className='rounded px-2 py-1 text-xs'>
+                                            {perm}
+                                          </code>
+                                        </UnstyledButton>
+                                      </Tooltip>
+                                    )}
+                                  </MantineCopyButton>
+                                  <CopyButton
+                                    value={`${window.location.href.split('#')[0]}#${perm}`}
+                                    size={14}
                                   >
-                                    Permission Group
-                                  </Badge>
-                                )}
+                                    <IconHash size={14} />
+                                  </CopyButton>
+                                  {hasChildren && (
+                                    <Badge
+                                      variant='secondary'
+                                      className='mt-1 text-xs whitespace-nowrap'
+                                    >
+                                      Permission Group
+                                    </Badge>
+                                  )}
+                                </div>
                               </div>
                               <div className='text-sm'>
                                 {obj.description || 'None'}
@@ -221,15 +252,20 @@ export default function Permissions() {
                               </div>
 
                               <div className='prose dark:prose-invert'>
-                                <a
-                                  href={`#${perm}`}
-                                  className='flex items-center gap-1'
-                                >
+                                <div className='flex items-center gap-1'>
                                   <code className='rounded px-2 py-1 font-mono text-sm'>
                                     {perm}
                                   </code>
-                                  <IconHash size={14} />
-                                </a>
+                                  <CopyButton value={perm} size={14}>
+                                    <IconCopy size={14} />
+                                  </CopyButton>
+                                  <CopyButton
+                                    value={`${window.location.href.split('#')[0]}#${perm}`}
+                                    size={14}
+                                  >
+                                    <IconHash size={14} />
+                                  </CopyButton>
+                                </div>
                               </div>
 
                               <div className='text-sm text-gray-600 dark:text-gray-400'>
