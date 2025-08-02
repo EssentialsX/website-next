@@ -11,7 +11,7 @@ export default function Header() {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <Container bg='#2C2E33' h='100%' fluid>
+    <Container className='bg-dark-500' h='100%' fluid>
       <Group justify='space-between' h='100%' px='xl'>
         <Link href='/' style={{ textDecoration: 'none', color: 'inherit' }}>
           <Image

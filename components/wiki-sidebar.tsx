@@ -5,11 +5,15 @@ import { Text } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function WikiSidebar() {
+interface WikiSidebarProps {
+  onLinkClick?: () => void;
+}
+
+export default function WikiSidebar({ onLinkClick }: WikiSidebarProps) {
   const path = usePathname();
 
   return (
-    <aside className='dark:bg-dark-600 w-64 min-w-64 rounded-lg p-4 not-dark:bg-gray-200'>
+    <aside className='dark:bg-dark-600 w-64 min-w-64 p-4 not-dark:bg-gray-200 md:block md:rounded-lg'>
       <div>
         {Object.keys(wikiNavigation).map((category, index) => (
           <div key={index} className='mb-6'>
@@ -21,9 +25,10 @@ export default function WikiSidebar() {
                 <Link
                   key={linkIndex}
                   href={link.slug ? `/wiki/${link.slug}` : link.href!}
-                  className={`block rounded px-2 py-1 text-sm leading-relaxed hover:bg-red-400 hover:text-white ${
+                  className={`block rounded px-2 py-1 text-sm leading-relaxed transition-colors hover:bg-red-400 hover:text-white ${
                     path === `/wiki/${link.slug}` && 'bg-red-500 text-white'
                   }`}
+                  onClick={onLinkClick}
                 >
                   {link.title}
                 </Link>
