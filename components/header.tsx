@@ -4,8 +4,10 @@ import { Burger, Button, Container, Drawer, Group, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const path = usePathname();
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -25,6 +27,17 @@ export default function Header() {
         <Group visibleFrom='sm'>
           <Button component={Link} c='white' href='/community' variant='subtle'>
             Community
+          </Button>
+          <Button component={Link} c='white' href='/commands' variant='subtle'>
+            Commands
+          </Button>
+          <Button
+            component={Link}
+            c='white'
+            href='/permissions'
+            variant='subtle'
+          >
+            Permissions
           </Button>
           <Button component={Link} c='white' href='/wiki' variant='subtle'>
             Wiki
@@ -54,8 +67,17 @@ export default function Header() {
           <Stack gap='md' p='md'>
             <Button
               component={Link}
+              href='/'
+              variant={path === '/' ? 'filled' : 'subtle'}
+              fullWidth
+              onClick={close}
+            >
+              Home
+            </Button>
+            <Button
+              component={Link}
               href='/community'
-              variant='subtle'
+              variant={path === '/community' ? 'filled' : 'subtle'}
               fullWidth
               onClick={close}
             >
@@ -64,7 +86,7 @@ export default function Header() {
             <Button
               component={Link}
               href='/wiki'
-              variant='subtle'
+              variant={path.startsWith('/wiki') ? 'filled' : 'subtle'}
               fullWidth
               onClick={close}
             >
@@ -72,7 +94,26 @@ export default function Header() {
             </Button>
             <Button
               component={Link}
+              href='/commands'
+              variant={path.startsWith('/commands') ? 'filled' : 'subtle'}
+              fullWidth
+              onClick={close}
+            >
+              Commands
+            </Button>
+            <Button
+              component={Link}
+              href='/permissions'
+              variant={path.startsWith('/permissions') ? 'filled' : 'subtle'}
+              fullWidth
+              onClick={close}
+            >
+              Permissions
+            </Button>
+            <Button
+              component={Link}
               href='/downloads'
+              variant={path.startsWith('/downloads') ? 'filled' : 'subtle'}
               fullWidth
               onClick={close}
             >
