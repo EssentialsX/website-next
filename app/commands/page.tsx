@@ -7,11 +7,7 @@ import PageHeader from '@/components/page-header';
 
 import { Command, CommandData } from '@/lib/types';
 import { Badge, Button, Select, TextInput } from '@mantine/core';
-import {
-  IconChevronDown,
-  IconHash,
-  IconSearch,
-} from '@tabler/icons-react';
+import { IconChevronDown, IconHash, IconSearch } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
 import { Entries } from 'type-fest';
