@@ -149,7 +149,14 @@ export default function Commands() {
                             style={{ scrollMarginTop: '80px' }}
                           >
                             {/* Desktop table row - hidden on mobile */}
-                            <div className='hidden grid-cols-5 items-center gap-4 p-4 lg:grid'>
+                            <div
+                              onClick={({ target }) => {
+                                if (target instanceof HTMLDivElement) {
+                                  toggleRow(cmd);
+                                }
+                              }}
+                              className='hidden grid-cols-5 items-center gap-4 p-4 lg:grid'
+                            >
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
