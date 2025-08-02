@@ -212,9 +212,12 @@ export default function Permissions() {
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
                                 </Badge>
-                                <span className='text-sm font-medium'>
-                                  {formatDefault(obj.default)}
-                                </span>
+                                <Badge
+                                  className='text-sm font-medium'
+                                  color='gray'
+                                >
+                                  Default: {formatDefault(obj.default)}
+                                </Badge>
                               </div>
 
                               <div className='prose dark:prose-invert'>
@@ -227,14 +230,6 @@ export default function Permissions() {
                                   </code>
                                   <IconHash size={14} />
                                 </a>
-                                {hasChildren && (
-                                  <Badge
-                                    variant='secondary'
-                                    className='mt-2 text-xs whitespace-nowrap'
-                                  >
-                                    Permission Group
-                                  </Badge>
-                                )}
                               </div>
 
                               <div className='text-sm text-gray-600 dark:text-gray-400'>
@@ -242,30 +237,38 @@ export default function Permissions() {
                               </div>
 
                               {hasChildren && (
-                                <div className='flex justify-end'>
-                                  <Button
-                                    variant='subtle'
-                                    size='xs'
-                                    px={4}
-                                    className='flex-shrink-0 transition-all duration-200 hover:scale-105'
-                                    onClick={() => toggleRow(rowKey)}
+                                <div className='flex justify-between'>
+                                  <Badge
+                                    variant='secondary'
+                                    className='mt-2 text-xs whitespace-nowrap'
                                   >
-                                    <span className='mr-1 text-xs'>
-                                      {openRow === rowKey ? 'Hide' : 'Show'}{' '}
-                                      children
-                                    </span>
-                                    <motion.div
-                                      animate={{
-                                        rotate: openRow === rowKey ? 180 : 0,
-                                      }}
-                                      transition={{
-                                        duration: 0.2,
-                                        ease: 'easeInOut',
-                                      }}
+                                    Permission Group
+                                  </Badge>
+                                  <div className='flex justify-end'>
+                                    <Button
+                                      variant='subtle'
+                                      size='xs'
+                                      px={4}
+                                      className='flex-shrink-0 transition-all duration-200 hover:scale-105'
+                                      onClick={() => toggleRow(rowKey)}
                                     >
-                                      <IconChevronDown className='h-4 w-4' />
-                                    </motion.div>
-                                  </Button>
+                                      <span className='mr-1 text-xs'>
+                                        {openRow === rowKey ? 'Hide' : 'Show'}{' '}
+                                        children
+                                      </span>
+                                      <motion.div
+                                        animate={{
+                                          rotate: openRow === rowKey ? 180 : 0,
+                                        }}
+                                        transition={{
+                                          duration: 0.2,
+                                          ease: 'easeInOut',
+                                        }}
+                                      >
+                                        <IconChevronDown className='h-4 w-4' />
+                                      </motion.div>
+                                    </Button>
+                                  </div>
                                 </div>
                               )}
                             </div>
