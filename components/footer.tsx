@@ -1,8 +1,10 @@
 'use client';
 
+import { showBetaBanner } from '@/components/BetaBanner';
 import StatBadge from '@/components/stat-badge';
 import { useSharedData } from '@/contexts/shared-data';
 import {
+  Anchor,
   Center,
   Container,
   SegmentedControl,
@@ -141,14 +143,24 @@ export default function Footer() {
           />
         </div>
         <div className='flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between'>
-          <Text
-            size='sm'
-            c='dimmed'
-            className='self-center text-center sm:text-left'
-          >
-            Website copyright © 2019-{year} EssentialsX Team, 2015-{year}{' '}
-            EssentialsX wiki contributors except where otherwise noted.
-          </Text>
+          <div className='flex flex-col items-center gap-2 sm:items-start'>
+            <Text
+              size='sm'
+              c='dimmed'
+              className='self-center text-center sm:text-left'
+            >
+              Website copyright © 2019-{year} EssentialsX Team, 2015-{year}{' '}
+              EssentialsX wiki contributors except where otherwise noted.
+            </Text>
+            <Anchor
+              size='sm'
+              onClick={() => showBetaBanner()}
+              className='cursor-pointer self-center sm:self-start'
+              c='dimmed'
+            >
+              ✨ Beta Site
+            </Anchor>
+          </div>
           <SegmentedControl
             value={themeMode}
             onChange={handleThemeChange}

@@ -1,5 +1,6 @@
 'use client';
 
+import { BetaBanner } from '@/components/BetaBanner';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { AppShell, AppShellHeader, AppShellMain } from '@mantine/core';
@@ -16,6 +17,7 @@ export default function CustomAppShell({ children }: PropsWithChildren) {
       </AppShellHeader>
       <AppShellMain pt={80}>
         {children}
+        <BetaBanner />
         <Footer />
       </AppShellMain>
     </AppShell>
