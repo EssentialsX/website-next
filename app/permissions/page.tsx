@@ -166,7 +166,14 @@ export default function Permissions() {
                             style={{ scrollMarginTop: '80px' }}
                           >
                             {/* Desktop table row - hidden on mobile */}
-                            <div className='hidden grid-cols-4 items-center gap-4 p-4 lg:grid'>
+                            <div
+                              onClick={({ target }) => {
+                                if (target instanceof HTMLDivElement) {
+                                  toggleRow(rowKey);
+                                }
+                              }}
+                              className='hidden grid-cols-4 items-center gap-4 p-4 lg:grid'
+                            >
                               <div className='flex items-center'>
                                 <Badge variant='secondary' className='text-xs'>
                                   {mod}
