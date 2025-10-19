@@ -30,7 +30,7 @@ export default function DownloadCard({
               checked={isSelecting}
               disabled={toggle === undefined}
               onChange={() => toggle!()}
-              className={`transition-transform duration-300 ease-in-out ${isSelecting ? 'scale-110 rotate-6 shadow-lg' : ''} `}
+              className={`transition-transform duration-300 ease-in-out ${isSelecting ? 'scale-110 shadow-lg' : ''} `}
             />
             <h2
               className={`text-lg font-semibold transition-colors duration-300 ease-in-out ${isSelecting ? 'not-dark:text-blue-800 dark:text-blue-400' : ''} `}
