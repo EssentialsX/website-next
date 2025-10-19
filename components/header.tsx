@@ -24,25 +24,69 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <Group visibleFrom='md'>
-          <Button component={Link} c='white' href='/community' variant='subtle'>
+        <Group visibleFrom='md' gap={5}>
+          <Button
+            component={Link}
+            size='md'
+            c='white'
+            href='/community'
+            variant='subtle'
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
+          >
             Community
           </Button>
-          <Button component={Link} c='white' href='/commands' variant='subtle'>
+          <Button
+            component={Link}
+            size='md'
+            c='white'
+            href='/commands'
+            variant='subtle'
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
+          >
             Commands
           </Button>
           <Button
             component={Link}
+            size='md'
             c='white'
             href='/permissions'
             variant='subtle'
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
           >
             Permissions
           </Button>
-          <Button component={Link} c='white' href='/wiki' variant='subtle'>
+          <Button
+            component={Link}
+            size='md'
+            c='white'
+            href='/wiki'
+            variant='subtle'
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
+          >
             Wiki
           </Button>
-          <Button component={Link} c='white' href='/downloads'>
+          <Button
+            component={Link}
+            size='md'
+            c='white'
+            href='/downloads'
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
+          >
             Downloads
           </Button>
         </Group>
