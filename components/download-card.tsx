@@ -48,6 +48,16 @@ export default function DownloadCard({
               BETA
             </Badge>
           )}
+          {module.legacy === true && (
+            <Badge
+              color='yellow'
+              variant='light'
+              size='xs'
+              className={`transition-all duration-300 ease-in-out ${isSelecting ? 'scale-110' : ''} `}
+            >
+              LEGACY
+            </Badge>
+          )}
           {module.required ?
             <Badge
               color='red'
