@@ -5,6 +5,7 @@ import { IconDownload } from '@tabler/icons-react';
 type CardProps = {
   module: Module;
   version: string;
+  downloadLink: string;
   download: () => void;
   toggle: (() => void) | undefined;
   isSelecting: boolean;
@@ -14,6 +15,7 @@ export default function DownloadCard({
   module,
   version,
   download,
+  downloadLink,
   toggle,
   isSelecting,
 }: CardProps) {
@@ -101,11 +103,16 @@ export default function DownloadCard({
         </p>
       </div>
       <Button
+        component='a'
         color='red'
         variant='filled'
         size='sm'
+        href={downloadLink}
         className={`w-full font-semibold transition-all duration-300 ease-in-out sm:w-auto ${isSelecting ? 'scale-110 shadow-lg' : ''} `}
-        onClick={() => download()}
+        onClick={e => {
+          e.preventDefault();
+          download();
+        }}
       >
         <IconDownload className='mr-2 sm:mr-0' />
         <span className='sm:hidden'>Download</span>

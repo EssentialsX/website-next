@@ -102,11 +102,14 @@ export default function DownloadSelector() {
     }
   };
 
-  const downloadSingle = (module: ModuleType) => {
-    const link =
-      buildType === 'stable' ?
+  const downloadLink = (module: ModuleType) => {
+    return buildType === 'stable' ?
         stableBuild.downloads[module]
       : devBuild.downloads[module];
+  };
+
+  const downloadSingle = (module: ModuleType) => {
+    const link = downloadLink(module);
 
     const element = document.createElement('a');
     element.setAttribute('href', link);
@@ -215,6 +218,7 @@ export default function DownloadSelector() {
       <DownloadCard
         module={modules.find(mod => mod.id === 'core')!}
         download={() => downloadSingle('core')}
+        downloadLink={downloadLink('core')}
         toggle={undefined}
         isSelecting={true}
         version={version}
@@ -232,6 +236,7 @@ export default function DownloadSelector() {
                 key={module.id}
                 module={module}
                 download={() => downloadSingle(module.id as ModuleType)}
+                downloadLink={downloadLink(module.id as ModuleType)}
                 toggle={() => toggleModule(module.id)}
                 isSelecting={selectedModules.includes(module.id)}
                 version={version}
@@ -248,6 +253,7 @@ export default function DownloadSelector() {
                 key={module.id}
                 module={module}
                 download={() => downloadSingle(module.id as ModuleType)}
+                downloadLink={downloadLink(module.id as ModuleType)}
                 toggle={() => toggleModule(module.id)}
                 isSelecting={selectedModules.includes(module.id)}
                 version={version}
@@ -268,6 +274,7 @@ export default function DownloadSelector() {
                 key={module.id}
                 module={module}
                 download={() => downloadSingle(module.id as ModuleType)}
+                downloadLink={downloadLink(module.id as ModuleType)}
                 toggle={() => toggleModule(module.id)}
                 isSelecting={selectedModules.includes(module.id)}
                 version={version}
@@ -284,6 +291,7 @@ export default function DownloadSelector() {
                 key={module.id}
                 module={module}
                 download={() => downloadSingle(module.id as ModuleType)}
+                downloadLink={downloadLink(module.id as ModuleType)}
                 toggle={() => toggleModule(module.id)}
                 isSelecting={selectedModules.includes(module.id)}
                 version={version}
@@ -305,6 +313,7 @@ export default function DownloadSelector() {
               key={module.id}
               module={module}
               download={() => downloadSingle(module.id as ModuleType)}
+              downloadLink={downloadLink(module.id as ModuleType)}
               toggle={() => toggleModule(module.id)}
               isSelecting={selectedModules.includes(module.id)}
               version={version}
