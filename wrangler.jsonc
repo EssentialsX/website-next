@@ -34,7 +34,11 @@
   ],
   "routes": [
     {
-      "pattern": "next.essentialsx.net",
+      "pattern": "essentialsx.net",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.essentialsx.net",
       "custom_domain": true
     }
   ]
