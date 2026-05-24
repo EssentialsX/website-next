@@ -40,7 +40,7 @@ export function VirtualizedText({
   }, [lines, normalizedSearchQuery]);
   const activeLineIndex =
     matchingLineIndexes.length > 0 ?
-      matchingLineIndexes[activeMatchIndex] ?? matchingLineIndexes[0]
+      (matchingLineIndexes[activeMatchIndex] ?? matchingLineIndexes[0])
     : null;
 
   const virtualizer = useVirtualizer({
@@ -64,7 +64,10 @@ export function VirtualizedText({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== 'f') {
+      if (
+        !(event.ctrlKey || event.metaKey) ||
+        event.key.toLowerCase() !== 'f'
+      ) {
         return;
       }
 
@@ -110,7 +113,10 @@ export function VirtualizedText({
     let key = 0;
 
     while (searchIndex < line.length) {
-      const matchIndex = lowerCaseLine.indexOf(normalizedSearchQuery, searchIndex);
+      const matchIndex = lowerCaseLine.indexOf(
+        normalizedSearchQuery,
+        searchIndex,
+      );
 
       if (matchIndex === -1) {
         renderedParts.push(
@@ -121,7 +127,9 @@ export function VirtualizedText({
 
       if (matchIndex > searchIndex) {
         renderedParts.push(
-          <span key={`text-${key++}`}>{line.slice(searchIndex, matchIndex)}</span>,
+          <span key={`text-${key++}`}>
+            {line.slice(searchIndex, matchIndex)}
+          </span>,
         );
       }
 
