@@ -23,6 +23,7 @@ export default function DumpFileCard({
   language,
 }: DumpFileCardProps) {
   const [sectionOpen, setSectionOpen] = useState(false);
+  const viewerHeight = 600;
 
   // Use virtualized text for large files that don't need syntax highlighting
   const shouldVirtualize =
@@ -60,8 +61,8 @@ export default function DumpFileCard({
 
       <Collapse in={sectionOpen}>
         {shouldVirtualize ?
-          <VirtualizedText content={content} maxHeight={400} />
-        : <ScrollArea h={400} scrollbarSize={8}>
+          <VirtualizedText content={content} maxHeight={viewerHeight} />
+        : <ScrollArea h={viewerHeight} scrollbarSize={8}>
             <CodeHighlight code={content} language={language} />
           </ScrollArea>
         }
