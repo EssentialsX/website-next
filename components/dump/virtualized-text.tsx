@@ -22,6 +22,9 @@ export function VirtualizedText({
   const [searchQuery, setSearchQuery] = useState('');
   const [activeMatchIndex, setActiveMatchIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [shortcutModifier, setShortcutModifier] = useState<'Cmd' | 'Ctrl'>(
+    'Ctrl',
+  );
 
   const lines = useMemo(() => content.split('\n'), [content]);
   const normalizedSearchQuery = searchQuery.trim().toLowerCase();
@@ -53,6 +56,13 @@ export function VirtualizedText({
   useEffect(() => {
     setActiveMatchIndex(0);
   }, [normalizedSearchQuery]);
+
+  useEffect(() => {
+    const platform = `${window.navigator.platform} ${window.navigator.userAgent}`;
+    if (/Mac|iPhone|iPad|iPod/i.test(platform)) {
+      setShortcutModifier('Cmd');
+    }
+  }, []);
 
   useEffect(() => {
     if (activeLineIndex === null) {
@@ -95,10 +105,10 @@ export function VirtualizedText({
     }
 
     setActiveMatchIndex(currentIndex => {
-      const nextIndex =
+      return (
         (currentIndex + direction + matchingLineIndexes.length) %
-        matchingLineIndexes.length;
-      return nextIndex;
+        matchingLineIndexes.length
+      );
     });
   };
 
@@ -185,7 +195,7 @@ export function VirtualizedText({
             `${activeMatchIndex + 1} / ${matchingLineIndexes.length} matches`
           : normalizedSearchQuery ?
             'No matches'
-          : <Kbd>Ctrl/Cmd + F</Kbd>}
+          : <Kbd>{shortcutModifier} + F</Kbd>}
         </Text>
       </div>
 
