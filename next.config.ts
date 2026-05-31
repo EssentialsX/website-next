@@ -102,7 +102,6 @@ const nextConfig: NextConfig = {
   ],
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
-    webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
@@ -110,9 +109,7 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
-    // @ts-expect-error - this is required for this to work with turbopack
     remarkPlugins: [['remark-gfm', { strict: true, throwOnError: true }]],
-    // @ts-expect-error - this is required for this to work with turbopack
     rehypePlugins: [['rehype-slug', { strict: true, throwOnError: true }]],
   },
 });

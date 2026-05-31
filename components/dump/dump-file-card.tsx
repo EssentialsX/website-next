@@ -59,7 +59,7 @@ export default function DumpFileCard({
         </ActionIcon>
       </CardSection>
 
-      <Collapse in={sectionOpen}>
+      <Collapse expanded={sectionOpen}>
         {shouldVirtualize ?
           <VirtualizedText content={content} maxHeight={viewerHeight} />
         : <ScrollArea h={viewerHeight} scrollbarSize={8}>

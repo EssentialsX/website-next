@@ -1,5 +1,7 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
 import { defineConfig } from 'eslint/config';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,10 +16,10 @@ const compat = new FlatCompat({
 
 export default defineConfig([
   {
-    extends: compat.extends(
-      'next/core-web-vitals',
-      'next/typescript',
-      'plugin:prettier/recommended',
-    ),
+    extends: [
+      ...nextCoreWebVitals,
+      ...nextTypescript,
+      ...compat.extends('plugin:prettier/recommended'),
+    ],
   },
 ]);

@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'tailwindcss/utilities';
-@import "tailwind-preset-mantine";
+@import 'tailwind-preset-mantine';
 
 @plugin "@tailwindcss/typography";
 

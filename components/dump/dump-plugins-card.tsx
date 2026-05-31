@@ -84,7 +84,7 @@ export default function DumpPluginsCard({
         </div>
       </div>
 
-      <Collapse in={expandedPlugin === plugin.name}>
+      <Collapse expanded={expandedPlugin === plugin.name}>
         <Box p='md' style={{ borderBottom: '1px solid #e9ecef' }}>
           {plugin.description !== undefined && (
             <div style={{ marginBottom: '10px' }}>
@@ -145,7 +145,7 @@ export default function DumpPluginsCard({
         </ActionIcon>
       </CardSection>
 
-      <Collapse in={sectionOpen}>
+      <Collapse expanded={sectionOpen}>
         <Table striped={false} highlightOnHover={false}>
           <TableThead>
             <TableTr>

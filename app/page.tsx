@@ -1,4 +1,5 @@
-import { Button, Container, rem, Stack, Text, Title } from '@mantine/core';
+import ButtonLink from '@/components/button-link';
+import { Container, rem, Stack, Text, Title } from '@mantine/core';
 import { IconCheck, IconTools, IconUsers } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -54,8 +55,7 @@ export default function Home() {
                 Whether you&apos;re a small group of friends or a huge server
                 with hundreds of players, we&apos;ve got the basics covered.
               </Text>
-              <Button
-                component={Link}
+              <ButtonLink
                 href='/wiki/introduction'
                 variant='filled'
                 color='red'
@@ -63,7 +63,7 @@ export default function Home() {
                 className='w-full md:w-auto'
               >
                 Visit the wiki
-              </Button>
+              </ButtonLink>
             </div>
           </div>
 
@@ -114,8 +114,7 @@ export default function Home() {
                 </a>
                 .
               </Text>
-              <Button
-                component={Link}
+              <ButtonLink
                 href='/community'
                 variant='filled'
                 color='red'
@@ -123,7 +122,7 @@ export default function Home() {
                 className='w-full md:w-auto'
               >
                 Join the community
-              </Button>
+              </ButtonLink>
             </div>
           </div>
 
@@ -153,8 +152,7 @@ export default function Home() {
                 customise EssentialsX to your liking, with clickable links,
                 hover text and RGB colours!
               </Text>
-              <Button
-                component={Link}
+              <ButtonLink
                 href='/wiki/installing'
                 variant='filled'
                 color='red'
@@ -162,7 +160,7 @@ export default function Home() {
                 className='w-full md:w-auto'
               >
                 Get started with EssentialsX
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </Stack>
