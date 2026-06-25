@@ -18,7 +18,7 @@ const ZIP_SMITH_WORKER = 'https://zip-smith.essentialsx.workers.dev';
 
 export default function DownloadSelector() {
   const params = useSearchParams();
-  const startBranch = params.get('branch') || 'dev';
+  const startBranch = 'stable';
   const [selectedModules, setSelectedModules] = useState<string[]>(['core']);
   const [buildType, setBuildType] = useState(startBranch);
   const [isDownloading, setIsDownloading] = useState(false);
