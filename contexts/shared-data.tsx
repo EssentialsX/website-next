@@ -227,12 +227,14 @@ export const SharedDataProvider = ({
   };
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     void fetchGithubData();
     void fetchPatreonData();
     void fetchDiscordData();
     void fetchBuildData();
     void fetchDownloads();
     void loadVersionData();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   return (

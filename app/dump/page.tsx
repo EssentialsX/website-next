@@ -103,6 +103,7 @@ function DumpContent() {
 
   useEffect(() => {
     if (bytebin) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchBytebinDump();
     } else if (gist) {
       fetchGistDump();

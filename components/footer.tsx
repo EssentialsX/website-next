@@ -89,6 +89,7 @@ export default function Footer() {
       THEME_STORAGE_KEY,
     ) as ThemeMode | null;
     const initialThemeMode = savedThemeMode || 'auto';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setThemeMode(initialThemeMode);
     applyTheme(initialThemeMode, setColorScheme);
   }, [setColorScheme]);
